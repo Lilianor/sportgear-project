@@ -1,0 +1,86 @@
+@use '../../styles/colors';
+@use '../../styles/spacing';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: colors.$black;
+  padding: 0 spacing.$spacing-80;
+  border: spacing.$spacing-1 solid colors.$white;
+
+  @media screen and (max-width: 880px) {
+    padding: 0 spacing.$spacing-20;
+  }
+}
+.mobileMenu {
+  display: none;
+  color: colors.$orange;
+  font-size: spacing.$font-md;
+  font-weight: 500;
+
+  @media screen and (max-width: 880px) {
+    display: block;
+    background-color: colors.$blackgrey;
+  }
+}
+.logoWrapper {
+  width: spacing.$spacing-100;
+}
+
+.logo {
+  width: 100%;
+}
+
+.iconsWrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: spacing.$spacing-40;
+  list-style: none;
+  color: colors.$green;
+
+  @media screen and (max-width: 880px) {
+    display: none;
+  }
+  
+}
+
+.iconsWrapperMobile {
+  display: none;
+
+  @media screen and (max-width: 880px) {
+    display: block;
+    color: colors.$white;
+    list-style: none;
+  }
+}
+
+.navWrapper {
+  display: flex;
+  align-items: center;
+}
+  
+
+
+.icon {
+  height: spacing.$spacing-40;
+  background-color: colors.$white;
+  
+}
+
+.linksWrapper {
+  display: flex;
+  align-items: center;
+  gap: spacing.$spacing-150;
+  padding-bottom: spacing.$spacing-10;
+  color: colors.$orange;
+  font-size: spacing.$font-md;
+  font-weight: 500;
+  
+
+  @media screen and (max-width: 880px) {
+    display: none;
+  }
+}
+
+
