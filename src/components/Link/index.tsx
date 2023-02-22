@@ -3,11 +3,12 @@
 interface LinkProps {
   texto: string;
   redirect: string;
+  openInANewTab?: boolean;
 }
 
-export default function Link({ texto, redirect }: LinkProps) {
+export default function Link({ texto, redirect, openInANewTab = false }: LinkProps) {
   return (
-    <a href={redirect} target="_blank" rel="noreferrer">
+    <a href={redirect} target={openInANewTab ? '_blank' : ''} rel="noreferrer">
       {texto}
     </a>   
   )

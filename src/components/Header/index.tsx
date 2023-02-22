@@ -19,7 +19,7 @@ function Header() {
           <img className={styles.logo} src={logo} alt="" />
         </div>
         <div className={styles.linksWrapper}>
-          <Link texto="Loja" redirect="/loja" />
+          <Link texto="Produtos" redirect="/products" />
           <Link texto="Sobre" redirect="/sobre" />
         </div>
 
@@ -50,7 +50,7 @@ function Header() {
         <div className={styles.mobileMenu}>
           <ul>
             <li>
-            <Link texto="Loja" redirect="/loja" />
+            <Link texto="Produtos" redirect="/loja" />
             </li>
             <li>
             <Link texto="Sobre" redirect="/sobre" />
