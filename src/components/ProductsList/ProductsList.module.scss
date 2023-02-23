@@ -2,10 +2,10 @@
 @use '../../styles/spacing';
 
 .row {
-  background-color: white;
+  background-color: colors.$white;
   display: flex;
   justify-content: space-evenly;
-  padding: 40px 40px 60px 40px;
+  padding: spacing.$spacing-40 spacing.$spacing-40 spacing.$spacing-60 spacing.$spacing-40;
   flex-wrap: wrap;
 }
 
@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 100px;
+  gap: spacing.$spacing-100;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -25,18 +25,18 @@
 }
 
 .itemProduto {
-  width: 200px;
-  height: 200px;
+  width: spacing.$spacing-200;
+  height: spacing.$spacing-200;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: spacing.$spacing-10;
 
   @media (max-width: 990px) {
-    margin-bottom: 50px;
+    margin-bottom: spacing.$spacing-50;
   }
 }
 
@@ -56,5 +56,5 @@
 
 .h3 {
   font-weight: bold;
-  font-size: 0.95rem;
+  font-size: spacing.$spacing-15;
 }

@@ -1,5 +1,6 @@
-import image from "../../assets/images/Adutor e Abdutor Evolution.jpg";
-import styles from "./ProductList.module.scss";
+import image from '../../assets/images/Adutor e Abdutor Evolution.jpg';
+import Button from '../Button';
+import styles from './ProductList.module.scss';
 
 export default function ProductList() {
   return (
@@ -8,23 +9,31 @@ export default function ProductList() {
         <img src={image} alt="" />
       </div>
       <div className={styles.description}>
-        <div><h1>Adutor e Abdutor Evolution</h1></div>
-        <div><h3>DESCRIÇÃO:</h3></div>
-        <div><p> COMPRIMENTO (CM) 
-            ESTRUTURA: <br />
+        <div>
+          <h1>Adutor e Abdutor Evolution</h1>
+        </div>
+        <div>
+          <h3>DESCRIÇÃO:</h3>
+        </div>
+        <div>
+          <p>
+            {' '}
+            COMPRIMENTO (CM) ESTRUTURA: <br />
             LARGURA (CM): <br />
             ALTURA (CM): <br />
             PESO DO EQUIPAMENTO (KG): <br />
-            ESTRUTURA:   AÇO CARBONO <br />
+            ESTRUTURA: AÇO CARBONO <br />
             ESPESSURA CHAPA (MM): 3MM <br />
             PINTURA: ELETROSTÁTICA <br />
             SOLDA: MIG <br />
-            ESTOFAMENTO:  COSTURA DUPLA <br />
-            REVESTIMENTO ESTOFAMENTO: NAPA NAVAL</p></div>
-          <div>
-            <button className={styles.buttom} type="submit">Adicionar ao carrinho</button>
-          </div>
+            ESTOFAMENTO: COSTURA DUPLA <br />
+            REVESTIMENTO ESTOFAMENTO: NAPA NAVAL
+          </p>
+        </div>
+        <div>
+          <Button title= "Adicionar ao carrinho"/>
+        </div>
       </div>
     </div>
-  )
+  );
 }
