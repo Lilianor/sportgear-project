@@ -1,4 +1,5 @@
 import image from '../../assets/images/Adutor e Abdutor Evolution.jpg';
+import Link from '../Link';
 import styles from './ProductsList.module.scss';
 
 export default function ProductsList() {
@@ -8,16 +9,18 @@ export default function ProductsList() {
         <div className={styles.form}>
           <h5>LINHAS</h5>
           <div className={styles.formCheckItem}>
-            <input className={styles.formCheckItemInput} type="checkbox" />
-            <label>Evolution</label>
-          </div>
-
-          <div className={styles.formCheckItem}>
-            <input className={styles.formCheckItemInput} type="checkbox" />
-            <label>Force</label>
+            <ul>
+              <li>
+                <Link texto="Evolution" redirect="/products" />
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <Link texto="Force" redirect="/products" />
+              </li>
+            </ul>
           </div>
         </div>
-
         <div className={styles.grid}>
           <div className={styles.itemProduto}>
             <img className={styles.image} src={image} alt="" />
