@@ -33,3 +33,15 @@
     align-items: center;
   }
 }
+
+.btn {
+  display: flex;
+  justify-content: center;
+  width: spacing.$spacing-220;
+  background-color: colors.$orange;
+  color: colors.$white;
+  border-radius: spacing.$spacing-10;
+  padding: spacing.$spacing-12 spacing.$spacing-25;
+  margin: spacing.$spacing-20 0;
+}
+

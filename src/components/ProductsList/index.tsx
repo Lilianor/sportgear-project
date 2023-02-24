@@ -1,6 +1,87 @@
-import image from '../../assets/images/Adutor e Abdutor Evolution.jpg';
+//import image from '../../assets/images/Adutor e Abdutor Evolution.jpg';
 import Link from '../Link';
 import styles from './ProductsList.module.scss';
+
+const products = [
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  },
+  {
+    id: 1,
+    image: 'https://via.placeholder.com/150',
+    alt: 'Adutor e Abdutor Evolution',
+    name: 'Adutor e Abdutor Evolution',
+    price: 8000
+  }
+  
+];
 
 export default function ProductsList() {
   return (
@@ -22,56 +103,19 @@ export default function ProductsList() {
           </div>
         </div>
         <div className={styles.grid}>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>{' '}
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
-          <div className={styles.itemProduto}>
-            <img className={styles.image} src={image} alt="" />
-            <h3 className={styles.h3}>Adutor e Abdutor Evolution</h3>
-            <p>R$ 8.000</p>
-          </div>
+          {products.map(product => {
+            return (
+              <div className={styles.itemProduto}>
+                <img
+                  className={styles.image}
+                  src={product.image}
+                  alt={product.alt}
+                />
+                <h3> {product.name} </h3>
+                <p>R$ {product.price}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

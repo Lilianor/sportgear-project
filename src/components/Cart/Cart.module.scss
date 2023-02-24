@@ -1,0 +1,72 @@
+@use '../../styles/colors';
+@use '../../styles/spacing';
+
+.img {
+  width: 200px;
+  height: 200px;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //position: absolute;
+
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+}
+
+.shoppingCart {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-top: 40px;
+  //position: relative;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.boxCart {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  @media (max-width: 768px) {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}
+
+.btnStyle {
+  color: colors.$white;
+  background-color: black;
+  border-radius: 3px;
+  width: 60px;
+  padding: 3px;
+  font-size: 13px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  width: spacing.$spacing-220;
+  background-color: colors.$orange;
+  color: colors.$white;
+  border-radius: spacing.$spacing-10;
+  padding: spacing.$spacing-12 spacing.$spacing-25;
+  margin: spacing.$spacing-20 0;
+}
+
+
+
