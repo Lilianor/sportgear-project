@@ -26,13 +26,19 @@ function Header() {
         <nav className={styles.navWrapper}>
           <ul className={styles.iconsWrapper}>
             <li>
-              <FiSearch />
+              <a href=".">
+                <FiSearch />
+              </a>
             </li>
             <li>
-              <FiShoppingCart />
+              <a href="/cart">
+                <FiShoppingCart />
+              </a>
             </li>
             <li>
-              <FiUser />
+              <a href="/login">
+                <FiUser />
+              </a>
             </li>
           </ul>
           <ul className={styles.iconsWrapperMobile}>
@@ -50,15 +56,14 @@ function Header() {
         <div className={styles.mobileMenu}>
           <ul>
             <li>
-            <Link texto="Produtos" redirect="/loja" />
+              <Link texto="Produtos" redirect="/loja" />
             </li>
             <li>
-            <Link texto="Sobre" redirect="/sobre" />
+              <Link texto="Sobre" redirect="/sobre" />
             </li>
           </ul>
         </div>
-      ) 
-    }
+      )}
     </>
   );
 }

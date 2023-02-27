@@ -1,0 +1,44 @@
+@use '../../styles/colors';
+@use '../../styles/spacing';
+
+.sectionCards {
+  display: flex;
+  padding: spacing.$spacing-100;
+  gap: spacing.$spacing-100;
+  //justify-content: center;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.cardImage {
+  border-radius: spacing.$spacing-5;
+  border: 1px groove colors.$grey;
+}
+
+.cardTitle {
+  display: flex;
+  justify-content: center;
+  padding-top: spacing.$spacing-10;
+  font-weight: bold;
+  font-size: spacing.$spacing-20;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  width: spacing.$spacing-130;
+  background-color: colors.$orange;
+  color: colors.$white;
+  border-radius: spacing.$spacing-10;
+  padding: spacing.$spacing-3 spacing.$spacing-25;
+  margin: spacing.$spacing-20 0;
+}

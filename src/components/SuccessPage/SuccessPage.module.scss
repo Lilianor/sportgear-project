@@ -3,19 +3,35 @@
 
 .main {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: center;
-  gap: 50px;
-  padding: 50px;
+  gap: spacing.$spacing-50;
+  padding: spacing.$spacing-100;
+}
+
+.description {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: spacing.$spacing-100;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 375px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
 }
 
 .image {
-  width: 200px;
-  height: 200px;
+  width: spacing.$spacing-200;
+  height: spacing.$spacing-200;
 }
 
 .h1 {
-  font-size: 1.8rem;
+  font-size: spacing.$font-lg;
   font-weight: bold;
   color: colors.$orange;
 }
@@ -25,5 +41,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
+  margin-top: spacing.$spacing-10;
 }

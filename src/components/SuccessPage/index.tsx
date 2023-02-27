@@ -1,40 +1,109 @@
 import image from '../../assets/images/Adutor e Abdutor Evolution.jpg';
 import styles from './SuccessPage.module.scss';
 
-const success = [
+const products = [
   {
-  id: 1,
-  image: 'https://via.placeholder.com/250',
-  alt: 'Adutor e Abdutor Evolution',
-  name: 'Adutor e Abdutor Evolution',
-  description: "Compra realizada com sucesso ;)"
+    id: 1,
+    image: 'https://via.placeholder.com/250',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
+    price: 8000
   }
 ];
 
 export default function SuccessList() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <div>
-          <img className={styles.image} src={image} alt="" />
-        </div>
-        <div className={styles.name}>
-          <h3>Adutor e Abdutor Evolution</h3>
-          <p>R$ 0.00</p>
-        </div>
-      </div>
-      <div className={styles.description}>
-        <div>
-          <img className={styles.image} src={image} alt="" />
-        </div>
-        <div className={styles.name}>
-          <h3>Adutor e Abdutor Evolution</h3>
-          <p>R$ 0.00</p>
-        </div>
-      </div>
       <div className={styles.h1}>
-        <h1>Compra realizada com Sucesso! :)</h1>
+        <h1>Compra realizada com sucesso ;)</h1>
       </div>
+
+      {products.map(product => {
+        return (
+          <>
+            <div className={styles.description}>
+              <div className={styles.box}>
+                <div>
+                  <img
+                    className={styles.image}
+                    src={product.image}
+                    alt={product.alt}
+                  />
+                </div>
+                <div className={styles.name}>
+                  <h3>{product.name}</h3>
+                  <p>R$ {product.price}</p>
+                </div>
+              </div>
+              <div className={styles.box}>
+                <div>
+                  <img
+                    className={styles.image}
+                    src={product.image}
+                    alt={product.alt}
+                  />
+                </div>
+                <div className={styles.name}>
+                  <h3>{product.name}</h3>
+                  <p>R$ {product.price}</p>
+                </div>
+              </div>
+              <div className={styles.box}>
+                <div>
+                  <img
+                    className={styles.image}
+                    src={product.image}
+                    alt={product.alt}
+                  />
+                </div>
+                <div className={styles.name}>
+                  <h3>{product.name}</h3>
+                  <p>R$ {product.price}</p>
+                </div>
+              </div>
+              <div className={styles.box}>
+                <div>
+                  <img
+                    className={styles.image}
+                    src={product.image}
+                    alt={product.alt}
+                  />
+                </div>
+                <div className={styles.name}>
+                  <h3>{product.name}</h3>
+                  <p>R$ {product.price}</p>
+                </div>
+              </div>
+              <div className={styles.box}>
+                <div>
+                  <img
+                    className={styles.image}
+                    src={product.image}
+                    alt={product.alt}
+                  />
+                </div>
+                <div className={styles.name}>
+                  <h3>{product.name}</h3>
+                  <p>R$ {product.price}</p>
+                </div>
+              </div>
+              <div className={styles.box}>
+                <div>
+                  <img
+                    className={styles.image}
+                    src={product.image}
+                    alt={product.alt}
+                  />
+                </div>
+                <div className={styles.name}>
+                  <h3>{product.name}</h3>
+                  <p>R$ {product.price}</p>
+                </div>
+              </div>
+            </div>
+          </>
+        );
+      })}
     </main>
   );
 }

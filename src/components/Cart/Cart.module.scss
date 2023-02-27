@@ -2,8 +2,8 @@
 @use '../../styles/spacing';
 
 .img {
-  width: 200px;
-  height: 200px;
+  width: spacing.$spacing-200;
+  height: spacing.$spacing-200;
 }
 
 .price {
@@ -20,15 +20,15 @@
 .main {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  padding: 20px;
+  gap: spacing.$spacing-40;
+  padding: spacing.$spacing-20;
 }
 
 .shoppingCart {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  padding-top: 40px;
+  padding-top: spacing.$spacing-40;
   //position: relative;
 
   @media (max-width: 768px) {
@@ -40,7 +40,7 @@
 .boxCart {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: spacing.$spacing-30;
 
   @media (max-width: 768px) {
     justify-content: flex-end;
@@ -50,11 +50,11 @@
 
 .btnStyle {
   color: colors.$white;
-  background-color: black;
-  border-radius: 3px;
-  width: 60px;
-  padding: 3px;
-  font-size: 13px;
+  background-color: colors.$black;
+  border-radius: spacing.$spacing-3;
+  width: spacing.$spacing-60;
+  padding: spacing.$spacing-3;
+  font-size: spacing.$spacing-13;
 }
 
 .btn {

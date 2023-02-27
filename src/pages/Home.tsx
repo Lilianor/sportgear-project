@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Carousel from "../components/Carousel";
+import HomeProducts from "../components/HomeProducts";
 import Footer from "../components/Footer";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <Header />
       <Carousel />
+      <HomeProducts />
       <Footer />
     </>
   );
