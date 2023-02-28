@@ -27,29 +27,112 @@ export default function ProductList() {
       {products.map(product => {
         return (
           <>
-            <div className="styles.image">
-              <img src={product.image} alt="{product.alt}" />
-            </div>
-            <div className={styles.description}>
-              <div>
-                <h1>{product.name}</h1>
+            <div className={styles.box}>
+              <div className="styles.image">
+                <img src={product.image} alt="{product.alt}" />
               </div>
-              <div>
-                <h3>DESCRIÇÃO:</h3>
-              </div>
-              <div>
-                <p>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: product.description }}
+              <div className={styles.description}>
+                <div>
+                  <h1>{product.name}</h1>
+                </div>
+                <div>
+                  <h3>DESCRIÇÃO:</h3>
+                </div>
+                <div>
+                  <p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: product.description }}
+                    />
+                  </p>
+                </div>
+                <div>
+                  <Link
+                    texto="Adicionar ao carrinho"
+                    redirect="cart"
+                    className={styles.btn}
                   />
-                </p>
+                </div>
               </div>
-              <div>
-                <Link
-                  texto="Adicionar ao carrinho"
-                  redirect="cart"
-                  className={styles.btn}
-                />
+            </div>
+            <div className={styles.box}>
+              <div className="styles.image">
+                <img src={product.image} alt="{product.alt}" />
+              </div>
+              <div className={styles.description}>
+                <div>
+                  <h1>{product.name}</h1>
+                </div>
+                <div>
+                  <h3>DESCRIÇÃO:</h3>
+                </div>
+                <div>
+                  <p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: product.description }}
+                    />
+                  </p>
+                </div>
+                <div>
+                  <Link
+                    texto="Adicionar ao carrinho"
+                    redirect="cart"
+                    className={styles.btn}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={styles.box}>
+              <div className="styles.image">
+                <img src={product.image} alt="{product.alt}" />
+              </div>
+              <div className={styles.description}>
+                <div>
+                  <h1>{product.name}</h1>
+                </div>
+                <div>
+                  <h3>DESCRIÇÃO:</h3>
+                </div>
+                <div>
+                  <p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: product.description }}
+                    />
+                  </p>
+                </div>
+                <div>
+                  <Link
+                    texto="Adicionar ao carrinho"
+                    redirect="cart"
+                    className={styles.btn}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={styles.box}>
+              <div className="styles.image">
+                <img src={product.image} alt="{product.alt}" />
+              </div>
+              <div className={styles.description}>
+                <div>
+                  <h1>{product.name}</h1>
+                </div>
+                <div>
+                  <h3>DESCRIÇÃO:</h3>
+                </div>
+                <div>
+                  <p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: product.description }}
+                    />
+                  </p>
+                </div>
+                <div>
+                  <Link
+                    texto="Adicionar ao carrinho"
+                    redirect="cart"
+                    className={styles.btn}
+                  />
+                </div>
               </div>
             </div>
           </>
