@@ -11,72 +11,74 @@ const products = [
   }
 ];
 
-export default function HomeList() {
+export default function HomeProducts() {
   return (
     <section className={styles.sectionCards}>
-      <div>
+      <div className={styles.h1}>
         <h1>Nossos Produtos</h1>
       </div>
-      {products.map(product => {
-        return (
-          <>
-            <div className={styles.container}>
-              <Card>
-                <Card.Img
-                  className={styles.cardImage}
-                  src={product.image}
-                />
-                <Card.Body className={styles.cardBody}>
-                  <Card.Title className={styles.cardTitle}>
-                    {product.name}
-                  </Card.Title>
-                  <Link
-                    texto="Saiba mais"
-                    redirect="products"
-                    className={styles.btn}
+      <div className={styles.boxWrapper}>
+        {products.map(product => {
+          return (
+            <>
+              <div className={styles.container}>
+                <Card>
+                  <Card.Img
+                    className={styles.cardImage}
+                    src={product.image}
                   />
-                </Card.Body>
-              </Card>
-            </div>
-            <div className={styles.container}>
-              <Card>
-                <Card.Img
-                  className={styles.cardImage}
-                  src={product.image}
-                />
-                <Card.Body className={styles.cardBody}>
-                  <Card.Title className={styles.cardTitle}>
-                    {product.name}
-                  </Card.Title>
-                  <Link
-                    texto="Saiba mais"
-                    redirect="products"
-                    className={styles.btn}
+                  <Card.Body className={styles.cardBody}>
+                    <Card.Title className={styles.cardTitle}>
+                      {product.name}
+                    </Card.Title>
+                    <Link
+                      texto="Saiba mais"
+                      redirect="products"
+                      className={styles.btn}
+                    />
+                  </Card.Body>
+                </Card>
+              </div>
+              <div className={styles.container}>
+                <Card>
+                  <Card.Img
+                    className={styles.cardImage}
+                    src={product.image}
                   />
-                </Card.Body>
-              </Card>
-            </div>
-            <div className={styles.container}>
-              <Card>
-                <Card.Img
-                  className={styles.cardImage}
-                  src={product.image}
-                />
-                <Card.Body className={styles.cardBody}>
-                  <Card.Title className={styles.cardTitle}>
-                    {product.name}
-                  </Card.Title>
-                  <Link
-                    texto="Saiba mais"
-                    redirect="products"
-                    className={styles.btn}
+                  <Card.Body className={styles.cardBody}>
+                    <Card.Title className={styles.cardTitle}>
+                      {product.name}
+                    </Card.Title>
+                    <Link
+                      texto="Saiba mais"
+                      redirect="products"
+                      className={styles.btn}
+                    />
+                  </Card.Body>
+                </Card>
+              </div>
+              <div className={styles.container}>
+                <Card>
+                  <Card.Img
+                    className={styles.cardImage}
+                    src={product.image}
                   />
-                </Card.Body>
-              </Card>
-            </div>
-          </>
-        );
-      })}
+                  <Card.Body className={styles.cardBody}>
+                    <Card.Title className={styles.cardTitle}>
+                      {product.name}
+                    </Card.Title>
+                    <Link
+                      texto="Saiba mais"
+                      redirect="products"
+                      className={styles.btn}
+                    />
+                  </Card.Body>
+                </Card>
+              </div>
+            </>
+          );
+        })}
+      </div>
     </section>
   );
 }

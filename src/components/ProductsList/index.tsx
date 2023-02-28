@@ -1,4 +1,6 @@
 //import image from '../../assets/images/Adutor e Abdutor Evolution.jpg';
+import { useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Link from '../Link';
 import styles from './ProductsList.module.scss';
 
@@ -74,16 +76,32 @@ const products = [
     price: 8000
   },
   {
-    id: 1,
+    id: 11,
     image: 'https://via.placeholder.com/150',
     alt: 'Adutor e Abdutor Evolution',
     name: 'Adutor e Abdutor Evolution',
     price: 8000
   }
-  
 ];
 
 export default function ProductsList() {
+  const [currentPage, setCurrentPage] = useState(0);
+  const productsPerPage = 10;
+  const pagesCount = Math.ceil(products.length / productsPerPage);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const currentProducts = products.slice(
+    currentPage * productsPerPage,
+    (currentPage + 1) * productsPerPage
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.row}>
@@ -103,7 +121,7 @@ export default function ProductsList() {
           </div>
         </div>
         <div className={styles.grid}>
-          {products.map(product => {
+          {currentProducts.map(product => {
             return (
               <div className={styles.itemProduto}>
                 <img
@@ -116,6 +134,20 @@ export default function ProductsList() {
               </div>
             );
           })}
+        </div>
+        <div className={styles.pagination}>
+          <button onClick={handlePreviousPage} disabled={currentPage === 0}>
+            <FaChevronLeft />
+          </button>
+          <span className={styles.span}>
+            {currentPage + 1} de {pagesCount}
+          </span>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === pagesCount - 1}
+          >
+            <FaChevronRight />
+          </button>
         </div>
       </div>
     </div>
