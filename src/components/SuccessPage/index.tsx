@@ -11,7 +11,7 @@ const products = [
   }
 ];
 
-export default function SuccessList() {
+export default function SuccessPage() {
   return (
     <main className={styles.main}>
       <div className={styles.h1}>

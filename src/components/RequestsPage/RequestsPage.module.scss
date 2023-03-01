@@ -8,7 +8,7 @@
   justify-content: center;
 }
 
- .box {
+.box {
   display: flex;
   align-items: center;
   gap: 50px;
@@ -20,7 +20,7 @@
   }
  }
 
-.description {
+ .description {
   display: flex;
   flex-direction: column;
 
@@ -50,4 +50,3 @@
   padding: spacing.$spacing-12 spacing.$spacing-25;
   margin: spacing.$spacing-20 0;
 }
-

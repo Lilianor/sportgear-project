@@ -8,80 +8,80 @@ const products = [
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
     id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
   },
   {
-    id: 11,
+    id: 1,
     image: 'https://via.placeholder.com/150',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
+    alt: 'Colocar nome aqui',
+    name: 'Colocar nome aqui',
     price: 8000
-  }
+  },
 ];
 
 export default function ProductsList() {
