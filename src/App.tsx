@@ -5,6 +5,7 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Success from './pages/Success';
 import Requests from "./pages/Requests";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/success" element={<Success />} />
         <Route path="/requests" element={<Requests />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
