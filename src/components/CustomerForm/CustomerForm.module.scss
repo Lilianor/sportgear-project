@@ -1,48 +1,45 @@
 @use '../../styles/colors';
 @use '../../styles/spacing';
 
-// .form {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background-color: colors.$grey;
-//   height: 100vh;
-// }
+
+.vStack {
+  gap: spacing.$spacing-30;
+}
 
 .h1 {
   color: colors.$orange;
   font-weight: bold;
   font-size: spacing.$spacing-30;
   display: flex;
-  padding-top: 40px;
+  padding-top: spacing.$spacing-40;
   justify-content: center;
 }
 
 .box {
   padding: 2%;
-  background-color: #F7FAFC;
-  width: 50%;
+  background-color: colors.$grey100;
+  width: 60%;
 }
 
 .flexName {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 50px;
+  padding: spacing.$spacing-50;
 }
 
 .flex {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
+  gap: spacing.$spacing-30;
 }
 
-.formControl {
-  width: 45%;
+.datepicker {
+  padding: 2%;
+  background-color: colors.$grey200;
+  width: 100%;
+  border-radius: spacing.$spacing-6;
 }
 
 .button {
-  
   display: flex;
   justify-content: center;
   width: spacing.$spacing-220;

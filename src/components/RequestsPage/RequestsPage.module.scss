@@ -11,8 +11,8 @@
 .box {
   display: flex;
   align-items: center;
-  gap: 50px;
-  padding-bottom: 40px;
+  gap: spacing.$spacing-50;
+  padding-bottom: spacing.$spacing-40;
 
   @media (max-width: 768px) {
   display: block;
@@ -26,7 +26,7 @@
 
   & h1 {
     padding-bottom: spacing.$spacing-10;
-    font-size: 1.8rem;
+    font-size: spacing.$font-lg;
     font-weight: bold;
   }
 
