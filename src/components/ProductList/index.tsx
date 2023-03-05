@@ -1,143 +1,71 @@
-//import image from '../../assets/images/Adutor e Abdutor Evolution.jpg';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Link from '../Link';
 import styles from './ProductList.module.scss';
 
-const products = [
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/450',
-    alt: 'Adutor e Abdutor Evolution',
-    name: 'Adutor e Abdutor Evolution',
-    description: `COMPRIMENTO (CM) ESTRUTURA: <br />
-    LARGURA (CM):  <br />
-    ALTURA (CM): 1m 60cm <br />
-    PESO DO EQUIPAMENTO (KG): 100kg <br />
-    ESTRUTURA: AÇO CARBONO <br />
-    ESPESSURA CHAPA (MM): 3MM <br />
-    PINTURA: ELETROSTÁTICA <br />
-    SOLDA: MIG <br />
-    ESTOFAMENTO: COSTURA DUPLA <br />
-    REVESTIMENTO ESTOFAMENTO: NAPA NAVAL`
-  }
-];
+interface Product {
+  _id: string;
+  images?: string;
+  name: string;
+  price: number;
+  description?: string;
+  categoryid?: string;
+}
 
 export default function ProductList() {
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product>();
+  console.log(product);
+
+  const addToCart = () => {
+    const storageProducts = JSON.parse(
+      localStorage.getItem('cartProducts') || ''
+    );
+    storageProducts.push(product);
+    localStorage.setItem('cartProducts', JSON.stringify(storageProducts));
+  };
+
+  const fetchProduct = async () => {
+    fetch(`http://localhost:5000/product/${id}`)
+      .then(response => response.json())
+      .then(data => setProduct(data))
+      .catch(error => console.error(error));
+  };
+
+  useEffect(() => {
+    fetchProduct();
+  }, []);
+
   return (
     <div className={styles.container}>
-      {products.map(product => {
-        return (
-          <>
-            <div className={styles.box}>
-              <div className="styles.image">
-                <img src={product.image} alt="{product.alt}" />
+      <>
+        {product && (
+          <div className={styles.box}>
+            <div className="styles.image">
+              <img src={`http://localhost:5000/images/product/${product.images}`} alt="" />
+            </div>
+            <div className={styles.description}>
+              <div>
+                <h1>{product.name}</h1>
               </div>
-              <div className={styles.description}>
-                <div>
-                  <h1>{product.name}</h1>
-                </div>
-                <div>
-                  <h3>DESCRIÇÃO:</h3>
-                </div>
-                <div>
-                  <p>
-                    <div
-                      dangerouslySetInnerHTML={{ __html: product.description }}
-                    />
-                  </p>
-                </div>
-                <div>
-                  <Link
-                    texto="Adicionar ao carrinho"
-                    redirect="cart"
-                    className={styles.btn}
-                  />
-                </div>
+              <div>
+                <h3>DESCRIÇÃO:</h3>
+              </div>
+              <div>
+                <p>{product.description}</p>
+              </div>
+              <div>
+                <Link
+                  texto="Adicionar ao carrinho"
+                  redirect="/cart"
+                  className={styles.btn}
+                  onClick={addToCart}
+                />
               </div>
             </div>
-            <div className={styles.box}>
-              <div className="styles.image">
-                <img src={product.image} alt="{product.alt}" />
-              </div>
-              <div className={styles.description}>
-                <div>
-                  <h1>{product.name}</h1>
-                </div>
-                <div>
-                  <h3>DESCRIÇÃO:</h3>
-                </div>
-                <div>
-                  <p>
-                    <div
-                      dangerouslySetInnerHTML={{ __html: product.description }}
-                    />
-                  </p>
-                </div>
-                <div>
-                  <Link
-                    texto="Adicionar ao carrinho"
-                    redirect="cart"
-                    className={styles.btn}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className={styles.box}>
-              <div className="styles.image">
-                <img src={product.image} alt="{product.alt}" />
-              </div>
-              <div className={styles.description}>
-                <div>
-                  <h1>{product.name}</h1>
-                </div>
-                <div>
-                  <h3>DESCRIÇÃO:</h3>
-                </div>
-                <div>
-                  <p>
-                    <div
-                      dangerouslySetInnerHTML={{ __html: product.description }}
-                    />
-                  </p>
-                </div>
-                <div>
-                  <Link
-                    texto="Adicionar ao carrinho"
-                    redirect="cart"
-                    className={styles.btn}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className={styles.box}>
-              <div className="styles.image">
-                <img src={product.image} alt="{product.alt}" />
-              </div>
-              <div className={styles.description}>
-                <div>
-                  <h1>{product.name}</h1>
-                </div>
-                <div>
-                  <h3>DESCRIÇÃO:</h3>
-                </div>
-                <div>
-                  <p>
-                    <div
-                      dangerouslySetInnerHTML={{ __html: product.description }}
-                    />
-                  </p>
-                </div>
-                <div>
-                  <Link
-                    texto="Adicionar ao carrinho"
-                    redirect="cart"
-                    className={styles.btn}
-                  />
-                </div>
-              </div>
-            </div>
-          </>
-        );
-      })}
+          </div>
+        )}
+      </>
     </div>
   );
 }

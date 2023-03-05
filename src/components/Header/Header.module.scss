@@ -27,7 +27,7 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px
+    gap: 10px;
   }
 }
 
@@ -51,7 +51,6 @@
   @media screen and (max-width: 880px) {
     display: none;
   }
-  
 }
 
 .iconsWrapperMobile {
@@ -68,8 +67,6 @@
   display: flex;
   align-items: center;
 }
-  
-
 
 .icon {
   height: spacing.$spacing-40;
@@ -88,4 +85,22 @@
   @media screen and (max-width: 880px) {
     display: none;
   }
+}
+
+.countWrapper {
+  position: relative;
+}
+
+.cartItemCount {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #FF5722;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
 }

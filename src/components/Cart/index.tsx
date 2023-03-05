@@ -3,57 +3,32 @@ import Button from '../Button';
 import Link from '../Link';
 import styles from './Cart.module.scss';
 
-const products = [
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 6000
-  },
-  {
-    id: 2,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 7000
-  },
-  {
-    id: 3,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 4,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 9000
-  },
-  {
-    id: 5,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 10000
-  }
-];
+interface CartProduct {
+  id: number;
+  images: string;
+  alt: string;
+  name: string;
+  price: number;
+}
 
 export default function Cart() {
+
+  const localStorageItems = localStorage.getItem('cartProducts');
+  const cartProducts = localStorageItems ? JSON.parse(localStorageItems) : [];
+
   const [total, setTotal] = useState(0);
-  const [cartItems, setCartItems] = useState(products);
+  const [cartItems, setCartItems] = useState<CartProduct[]>(cartProducts);
 
   const removeProduct = (productId: number) => {
-    const updatedItems = cartItems.filter(item => item.id !== productId);
+    const updatedItems = cartItems?.filter(item => item.id !== productId);
     setCartItems(updatedItems);
-    const newTotal = updatedItems.reduce((acc, item) => acc + item.price, 0);
+    localStorage.setItem('cartProducts', JSON.stringify(updatedItems));
+    const newTotal = updatedItems.reduce((acc, item) => acc + (item.price ?? 0), 0);
     setTotal(newTotal);
   };
 
   useEffect(() => {
-    const initialTotal = cartItems.reduce((acc, item) => acc + item.price, 0);
+    const initialTotal = cartItems.reduce((acc, item) => acc + (item.price ?? 0), 0);
     setTotal(initialTotal);
   }, [cartItems]);
 
@@ -61,15 +36,15 @@ export default function Cart() {
     <main className={styles.shoppingCart}>
       <div className={styles.cart}>
         {cartItems.map(product => {
-          const { id, image, alt, name, price } = product;
+          const { id, images, alt, name, price } = product;
           return (
             <div key={id} className={styles.boxCart}>
               <div className={styles.img}>
-                <img src={image} alt={alt} />
+                <img src={`http://localhost:5000/images/product/${images}`}  alt="" />
               </div>
               <div className={styles.text}>
                 <h3>{name}</h3>
-                <p>R$ {price}</p>
+                <p>R$ {price || "0.00"}</p>
                 <Button
                   title="Excluir"
                   className={styles.btnStyle}

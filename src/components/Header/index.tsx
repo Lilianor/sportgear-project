@@ -11,12 +11,18 @@ import styles from './Header.module.scss';
 
 function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const storageProducts = JSON.parse(
+    localStorage.getItem('cartProducts') || ''
+  );
+  const totalProductsInCart = storageProducts.length;
 
   return (
     <>
       <header className={styles.header}>
         <div className={styles.logoWrapper}>
-          <img className={styles.logo} src={logo} alt="" />
+          <Link redirect="/">
+            <img className={styles.logo} src={logo} alt="" />
+          </Link>
         </div>
         <div className={styles.linksWrapper}>
           <Link texto="Produtos" redirect="/products" />
@@ -31,8 +37,13 @@ function Header() {
               </a>
             </li>
             <li>
-              <a href="/cart">
+              <a href="/cart" className={styles.countWrapper}>
                 <FiShoppingCart />
+                {totalProductsInCart > 0 && (
+                  <span className={styles.cartItemCount}>
+                    {totalProductsInCart}
+                  </span>
+                )}
               </a>
             </li>
             <li>

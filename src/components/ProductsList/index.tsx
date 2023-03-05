@@ -1,91 +1,21 @@
-//import image from '../../assets/images/Adutor e Abdutor Evolution.jpg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Link from '../Link';
 import styles from './ProductsList.module.scss';
 
-const products = [
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/150',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    price: 8000
-  },
-];
+interface Product {
+  _id: string;
+  images?: string;
+  name: string;
+  price: number;
+  description?: string;
+  categoryid?: string;
+}
 
 export default function ProductsList() {
   const [currentPage, setCurrentPage] = useState(0);
+  const [products, setProducts] = useState<Product[]>([]);
+
   const productsPerPage = 10;
   const pagesCount = Math.ceil(products.length / productsPerPage);
 
@@ -97,10 +27,23 @@ export default function ProductsList() {
     setCurrentPage(currentPage - 1);
   };
 
-  const currentProducts = products.slice(
-    currentPage * productsPerPage,
-    (currentPage + 1) * productsPerPage
-  );
+  const currentProducts = products
+    ? products.slice(
+        currentPage * productsPerPage,
+        (currentPage + 1) * productsPerPage
+      )
+    : [];
+
+  const fetchProducts = async () => {
+    fetch('http://localhost:5000/product')
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error(error));
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -121,19 +64,21 @@ export default function ProductsList() {
           </div>
         </div>
         <div className={styles.grid}>
-          {currentProducts.map(product => {
-            return (
-              <div className={styles.itemProduto}>
-                <img
-                  className={styles.image}
-                  src={product.image}
-                  alt={product.alt}
-                />
-                <h3> {product.name} </h3>
-                <p>R$ {product.price}</p>
-              </div>
-            );
-          })}
+          {products.length > 0 &&
+            currentProducts.map(product => {
+              return (
+                <Link redirect={`/product/${product._id}`} key={product._id}>
+                  <div className={styles.itemProduto}>
+                    <img
+                      className={styles.image}
+                      src={`http://localhost:5000/images/product/${product.images}`}
+                    />
+                    <h3> {product.name} </h3>
+                    <p>R$ {product.price}</p>
+                  </div>
+                </Link>
+              );
+            })}
         </div>
         <div className={styles.pagination}>
           <button onClick={handlePreviousPage} disabled={currentPage === 0}>

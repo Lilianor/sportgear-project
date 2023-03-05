@@ -2,15 +2,16 @@
 @use '../../styles/spacing';
 
 .img {
-  width: spacing.$spacing-200;
+  width: spacing.$spacing-150;
   height: spacing.$spacing-200;
+  
 }
 
 .price {
   display: flex;
   flex-direction: column;
   align-items: center;
-  //position: absolute;
+  
 
   @media (max-width: 768px) {
     align-items: center;

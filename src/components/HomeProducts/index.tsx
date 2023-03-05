@@ -1,7 +1,16 @@
+import { useState, useEffect } from 'react';
 import Link from '../Link';
 import Card from 'react-bootstrap/Card';
-//import image from "../../assets/images/Adutor e Abdutor Evolution.jpg";
 import styles from './HomeProducts.module.scss';
+
+interface Product {
+  _id: string;
+  images?: string;
+  name: string;
+  price: number;
+  description?: string;
+  categoryid?: string;
+}
 
 const products = [
   {
@@ -12,6 +21,19 @@ const products = [
 ];
 
 export default function HomeProducts() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  const fetchProducts = async () => {
+    fetch('http://localhost:5000/product')
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error(error));
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <section className={styles.sectionCards}>
       <div className={styles.h1}>
@@ -20,62 +42,24 @@ export default function HomeProducts() {
       <div className={styles.boxWrapper}>
         {products.map(product => {
           return (
-            <>
-              <div className={styles.container}>
-                <Card>
-                  <Card.Img
-                    className={styles.cardImage}
-                    src={product.image}
+            <div className={styles.container}>
+              <Card className={styles.card}>
+                <Card.Img
+                  className={styles.cardImage}
+                  src={`http://localhost:5000/images/product/${product.images}`}
+                />
+                <Card.Body className={styles.cardBody}>
+                  <Card.Title className={styles.cardTitle}>
+                    {product.name}
+                  </Card.Title>
+                  <Link
+                    texto="Saiba mais"
+                    redirect="products"
+                    className={styles.btn}
                   />
-                  <Card.Body className={styles.cardBody}>
-                    <Card.Title className={styles.cardTitle}>
-                      {product.name}
-                    </Card.Title>
-                    <Link
-                      texto="Saiba mais"
-                      redirect="products"
-                      className={styles.btn}
-                    />
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className={styles.container}>
-                <Card>
-                  <Card.Img
-                    className={styles.cardImage}
-                    src={product.image}
-                  />
-                  <Card.Body className={styles.cardBody}>
-                    <Card.Title className={styles.cardTitle}>
-                      {product.name}
-                    </Card.Title>
-                    <Link
-                      texto="Saiba mais"
-                      redirect="products"
-                      className={styles.btn}
-                    />
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className={styles.container}>
-                <Card>
-                  <Card.Img
-                    className={styles.cardImage}
-                    src={product.image}
-                  />
-                  <Card.Body className={styles.cardBody}>
-                    <Card.Title className={styles.cardTitle}>
-                      {product.name}
-                    </Card.Title>
-                    <Link
-                      texto="Saiba mais"
-                      redirect="products"
-                      className={styles.btn}
-                    />
-                  </Card.Body>
-                </Card>
-              </div>
-            </>
+                </Card.Body>
+              </Card>
+            </div>
           );
         })}
       </div>

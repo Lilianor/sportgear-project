@@ -28,6 +28,10 @@
     }
 }
 
+.card {
+  width: 50%;
+}
+
 .cardImage {
   border-radius: spacing.$spacing-5;
   border: 1px groove colors.$grey;
