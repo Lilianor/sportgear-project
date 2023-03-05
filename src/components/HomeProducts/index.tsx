@@ -12,14 +12,6 @@ interface Product {
   categoryid?: string;
 }
 
-const products = [
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/250',
-    name: 'Colocar nome aqui'
-  }
-];
-
 export default function HomeProducts() {
   const [products, setProducts] = useState<Product[]>([]);
 
