@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logo from '../../assets/images/SportGear.png';
 import {
   FiSearch,
@@ -11,6 +11,8 @@ import styles from './Header.module.scss';
 
 function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
   const storageProducts = JSON.parse(
     localStorage.getItem('cartProducts') || ''
   );
@@ -47,8 +49,13 @@ function Header() {
               </a>
             </li>
             <li>
-              <a href="/login">
+              <a href={loggedIn ? "/register" : "login"}>
                 <FiUser />
+                <span>
+                  {loggedIn ? 'Minha conta' : ' Faça seu login '}
+                  <br />
+                  <span className={styles.span}>{' ou cadastre-se'}</span> 
+                </span>
               </a>
             </li>
           </ul>

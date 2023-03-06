@@ -11,12 +11,13 @@ import {
   FormErrorMessage,
   Select
 } from '@chakra-ui/react';
-import styles from './CustomerForm.module.scss';
+import styles from './Register.module.scss';
 
-export default function CustomerForm() {
+export default function EditProfile() {
   const formik = useFormik({
     initialValues: {
       name: '',
+      email:'',
       cpf: '',
       rg: '',
       sexo: '',
@@ -34,7 +35,8 @@ export default function CustomerForm() {
 
   return (
     <div>
-      <h1 className={styles.h1}>Dados pessoais</h1>
+      <h1 className={styles.h1}>Cadastre-se</h1> <br />
+      <h3 className={styles.h3}>Preencha abaixo seus dados pessoais</h3>
 
       <Flex className={styles.flexName}>
         <Box className={styles.box}>
@@ -52,6 +54,19 @@ export default function CustomerForm() {
                   value={formik.values.name}
                 />
               </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="email">E-mail*</FormLabel>
+                <Input
+                  sx={inputBackground}
+                  id="email"
+                  name="email"
+                  type="email"
+                  variant="filled"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                />
+              </FormControl>
+              
               <Flex className={styles.flex}>
                 <FormControl>
                   <FormLabel htmlFor="cpf">Cpf*</FormLabel>
@@ -166,8 +181,36 @@ export default function CustomerForm() {
                   />
                 </FormControl>
               </Flex>
+              <Flex className={styles.flex}>
+                <FormControl>
+                  <FormLabel htmlFor="telefone">Senha*</FormLabel>
+                  <Input
+                    sx={inputBackground}
+                    id="telefone"
+                    name="telefone"
+                    type="telefone"
+                    variant="filled"
+                    onChange={formik.handleChange}
+                    value={formik.values.telefone}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel htmlFor="telefoneadicional">
+                    Confirmar senha*
+                  </FormLabel>
+                  <Input
+                    sx={inputBackground}
+                    id="telefoneadicional"
+                    name="telefoneadicional"
+                    type="telefoneadicional"
+                    variant="filled"
+                    onChange={formik.handleChange}
+                    value={formik.values.telefoneadicional}
+                  />
+                </FormControl>
+              </Flex>
               <button className={styles.button} type="submit">
-                Salvar Alterações
+                Finalizar Cadastro
               </button>
             </VStack>
           </form>

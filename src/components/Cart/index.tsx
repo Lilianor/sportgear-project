@@ -4,7 +4,7 @@ import Link from '../Link';
 import styles from './Cart.module.scss';
 
 interface CartProduct {
-  id: number;
+  _id: number;
   images: string;
   alt: string;
   name: string;
@@ -12,7 +12,6 @@ interface CartProduct {
 }
 
 export default function Cart() {
-
   const localStorageItems = localStorage.getItem('cartProducts');
   const cartProducts = localStorageItems ? JSON.parse(localStorageItems) : [];
 
@@ -20,15 +19,51 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState<CartProduct[]>(cartProducts);
 
   const removeProduct = (productId: number) => {
-    const updatedItems = cartItems?.filter(item => item.id !== productId);
+    const updatedItems = cartItems?.filter(item => item._id !== productId);
+
     setCartItems(updatedItems);
     localStorage.setItem('cartProducts', JSON.stringify(updatedItems));
-    const newTotal = updatedItems.reduce((acc, item) => acc + (item.price ?? 0), 0);
+
+    const newTotal = updatedItems.reduce(
+      (acc, item) => acc + (item.price ?? 0),
+      0
+    );
     setTotal(newTotal);
   };
 
+  const createOrder = () => {
+    const orderItems = cartProducts.map((product: CartProduct) => ({
+      productsId: product._id,
+      amount: 1
+    }));
+    const data = { product: orderItems };
+    // TODO: Adicionar o token abaixo para fazer o POST do pedido (/card)
+    const token = "SEU_TOKEN_DE_AUTORIZACAO";
+
+    fetch('http://localhost:5000/card', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // TODO: Limpar o carrinho (se chegou aqui é pq deu bom)
+      })
+      .catch(error => {
+        console.error(error);
+        // TODO: Mandar uma mensagem de erro dizendo que deu ruim
+      });
+  };
+
   useEffect(() => {
-    const initialTotal = cartItems.reduce((acc, item) => acc + (item.price ?? 0), 0);
+    const initialTotal = cartItems.reduce(
+      (acc, item) => acc + (item.price ?? 0),
+      0
+    );
     setTotal(initialTotal);
   }, [cartItems]);
 
@@ -36,19 +71,22 @@ export default function Cart() {
     <main className={styles.shoppingCart}>
       <div className={styles.cart}>
         {cartItems.map(product => {
-          const { id, images, alt, name, price } = product;
+          const { _id, images, name, price } = product;
           return (
-            <div key={id} className={styles.boxCart}>
+            <div key={_id} className={styles.boxCart}>
               <div className={styles.img}>
-                <img src={`http://localhost:5000/images/product/${images}`}  alt="" />
+                <img
+                  src={`http://localhost:5000/images/product/${images}`}
+                  alt=""
+                />
               </div>
               <div className={styles.text}>
                 <h3>{name}</h3>
-                <p>R$ {price || "0.00"}</p>
+                <p>R$ {price || '0.00'}</p>
                 <Button
                   title="Excluir"
                   className={styles.btnStyle}
-                  onClick={() => removeProduct(id)}
+                  onClick={() => removeProduct(_id)}
                 />
               </div>
             </div>
@@ -63,8 +101,10 @@ export default function Cart() {
         <div>
           <Link
             texto="Finalizar Compra"
-            redirect="success"
+            // TODO: depois de testar que o pedido está sendo cadastrado, descomentar a linha abaixo (para mandar para a pagina de sucesso)
+            // redirect="success"
             className={styles.btn}
+            onClick={createOrder}
           />
         </div>
         <div>

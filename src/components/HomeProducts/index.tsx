@@ -27,8 +27,8 @@ export default function HomeProducts() {
   }, []);
 
   return (
-    <section className={styles.sectionCards}>
-      <div className={styles.h1}>
+        <section className={styles.sectionCards}>
+        <div className={styles.h1}>
         <h1>Nossos Produtos</h1>
       </div>
       <div className={styles.boxWrapper}>
@@ -51,10 +51,10 @@ export default function HomeProducts() {
                   />
                 </Card.Body>
               </Card>
-            </div>
+        </div>
           );
         })}
-      </div>
+        </div>
     </section>
   );
 }

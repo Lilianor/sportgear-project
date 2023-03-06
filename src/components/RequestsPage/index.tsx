@@ -1,76 +1,61 @@
+import { useState, useEffect } from 'react';
 import Link from '../Link';
 import styles from './RequestsPage.module.scss';
 
-const products = [
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/250',
-    alt: 'Colocar nome aqui',
-    name: 'Colocar nome aqui',
-    date: '00/00/0000',
-    price: 10000
-  }
-];
+interface Product {
+  _id: string;
+  images?: string;
+  name: string;
+  price: number;
+  description?: string;
+  categoryid?: string;
+  date: '00/00/0000';
+}
 
 export default function RequestsPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  const fetchProducts = async () => {
+    fetch('http://localhost:5000/product')
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error(error));
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <div className={styles.container}>
       {products.map(product => {
         return (
-          <>
-            <div className={styles.box}>
-              <div className="styles.image">
-                <img src={product.image} alt="{product.alt}" />
+          <div className={styles.box}>
+            <div className="styles.image">
+              <img src={`http://localhost:5000/images/product/${product.images}`} />
+            </div>
+            <div className={styles.description}>
+              <div>
+                <h1>{product.name}</h1>
               </div>
-              <div className={styles.description}>
-                <div>
-                  <h1>{product.name}</h1>
-                </div>
-                <div>
-                  <h3>PEDIDO REALIZADO EM: {product.date}</h3>
-                </div>
-                <div>
-                  <h3>PEDIDO Nº {product.id} </h3>
-                </div>
-                <div>
-                  <h3>TOTAL R$ {product.price} </h3>
-                </div>
-                <div>
-                  <Link
-                    texto="Comprar Novamente"
-                    redirect="products"
-                    className={styles.btn}
-                  />
-                </div>
+              <div>
+                <h3>PEDIDO REALIZADO EM: {product.date}</h3>
+              </div>
+              <div>
+                <h3>PEDIDO Nº {product._id} </h3>
+              </div>
+              <div>
+                <h3>TOTAL R$ {product.price} </h3>
+              </div>
+              <div>
+                <Link
+                  texto="Comprar Novamente"
+                  redirect="products"
+                  className={styles.btn}
+                />
               </div>
             </div>
-            <div className={styles.box}>
-              <div className="styles.image">
-                <img src={product.image} alt="{product.alt}" />
-              </div>
-              <div className={styles.description}>
-                <div>
-                  <h1>{product.name}</h1>
-                </div>
-                <div>
-                  <h3>PEDIDO REALIZADO EM: {product.date}</h3>
-                </div>
-                <div>
-                  <h3>PEDIDO Nº {product.id} </h3>
-                </div>
-                <div>
-                  <h3>TOTAL R$ {product.price} </h3>
-                </div>
-                <div>
-                  <Link
-                    texto="Comprar Novamente"
-                    redirect="products"
-                    className={styles.btn}
-                  />
-                </div>
-              </div>
-            </div>
-          </>
+          </div>
         );
       })}
     </div>

@@ -23,12 +23,22 @@
   }
 
   & ul {
-    padding: 20px;
+    padding: spacing.$spacing-20;
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: spacing.$spacing-10;
   }
+}
+
+a {
+  display: flex;
+  align-items: center;
+  gap: spacing.$spacing-20;
+}
+
+.span {
+  text-decoration: underline;
 }
 
 .logoWrapper {
