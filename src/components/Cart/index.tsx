@@ -102,7 +102,7 @@ export default function Cart() {
           <Link
             texto="Finalizar Compra"
             // TODO: depois de testar que o pedido está sendo cadastrado, descomentar a linha abaixo (para mandar para a pagina de sucesso)
-            // redirect="success"
+            redirect="success"
             className={styles.btn}
             onClick={createOrder}
           />
