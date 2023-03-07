@@ -22,7 +22,9 @@ export default function CustomerForm() {
       sexo: '',
       datanascimento: '',
       telefone: '',
-      telefoneadicional: ''
+      telefoneadicional: '',
+      senhaatual: '',
+      alterarsenha: ''
     },
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
@@ -163,6 +165,34 @@ export default function CustomerForm() {
                     variant="filled"
                     onChange={formik.handleChange}
                     value={formik.values.telefoneadicional}
+                  />
+                </FormControl>
+              </Flex>
+              <Flex className={styles.flex}>
+                <FormControl>
+                  <FormLabel htmlFor="senhaatual">Senha atual</FormLabel>
+                  <Input
+                    sx={inputBackground}
+                    id="senhaatual"
+                    name="senhaatual"
+                    type="senhaatual"
+                    variant="filled"
+                    onChange={formik.handleChange}
+                    value={formik.values.senhaatual}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel htmlFor="alterarsenha">
+                    Alterar Senha
+                  </FormLabel>
+                  <Input
+                    sx={inputBackground}
+                    id="alterarsenha"
+                    name="alterarsenha"
+                    type="alterarsenha"
+                    variant="filled"
+                    onChange={formik.handleChange}
+                    value={formik.values.alterarsenha}
                   />
                 </FormControl>
               </Flex>

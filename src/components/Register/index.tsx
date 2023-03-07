@@ -23,7 +23,9 @@ export default function EditProfile() {
       sexo: '',
       datanascimento: '',
       telefone: '',
-      telefoneadicional: ''
+      telefoneadicional: '',
+      senha:'',
+      confirmarsenha:''
     },
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
@@ -190,27 +192,27 @@ export default function EditProfile() {
                   <FormLabel htmlFor="telefone">Senha*</FormLabel>
                   <Input
                     sx={inputBackground}
-                    id="telefone"
-                    name="telefone"
-                    type="telefone"
+                    id="senha"
+                    name="senha"
+                    type="senha"
                     variant="filled"
                     onChange={formik.handleChange}
-                    value={formik.values.telefone}
+                    value={formik.values.senha}
                     required
                   />
                 </FormControl>
                 <FormControl>
-                  <FormLabel htmlFor="telefoneadicional">
+                  <FormLabel htmlFor="confirmarsenha">
                     Confirmar senha*
                   </FormLabel>
                   <Input
                     sx={inputBackground}
-                    id="telefoneadicional"
-                    name="telefoneadicional"
-                    type="telefoneadicional"
+                    id="confirmarsenha"
+                    name="confirmarsenha"
+                    type="confirmarsenha"
                     variant="filled"
                     onChange={formik.handleChange}
-                    value={formik.values.telefoneadicional}
+                    value={formik.values.confirmarsenha}
                     required
                   />
                 </FormControl>
