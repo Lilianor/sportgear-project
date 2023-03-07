@@ -41,7 +41,7 @@ export default function CustomerForm() {
           <form onSubmit={formik.handleSubmit}>
             <VStack className={styles.vStack}>
               <FormControl>
-                <FormLabel htmlFor="name">Nome Completo*</FormLabel>
+                <FormLabel htmlFor="name">Nome Completo</FormLabel>
                 <Input
                   sx={inputBackground}
                   id="name"
@@ -54,7 +54,7 @@ export default function CustomerForm() {
               </FormControl>
               <Flex className={styles.flex}>
                 <FormControl>
-                  <FormLabel htmlFor="cpf">Cpf*</FormLabel>
+                  <FormLabel htmlFor="cpf">Cpf</FormLabel>
                   <Input
                     sx={inputBackground}
                     id="cpf"
@@ -96,7 +96,7 @@ export default function CustomerForm() {
               </Flex>
               <Flex className={styles.flex}>
                 <FormControl>
-                  <FormLabel htmlFor="sexo">Sexo*</FormLabel>
+                  <FormLabel htmlFor="sexo">Sexo</FormLabel>
                   <Select
                     sx={inputBackground}
                     id="sexo"
@@ -140,7 +140,7 @@ export default function CustomerForm() {
 
               <Flex className={styles.flex}>
                 <FormControl>
-                  <FormLabel htmlFor="telefone">Telefone*</FormLabel>
+                  <FormLabel htmlFor="telefone">Telefone</FormLabel>
                   <Input
                     sx={inputBackground}
                     id="telefone"

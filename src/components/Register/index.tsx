@@ -48,8 +48,8 @@ export default function EditProfile() {
                   sx={inputBackground}
                   id="name"
                   name="name"
-                  type="name"
                   variant="filled"
+                  required
                   onChange={formik.handleChange}
                   value={formik.values.name}
                 />
@@ -64,6 +64,7 @@ export default function EditProfile() {
                   variant="filled"
                   onChange={formik.handleChange}
                   value={formik.values.email}
+                  required
                 />
               </FormControl>
               
@@ -91,6 +92,7 @@ export default function EditProfile() {
                     value={formik.values.cpf}
                     isInvalid={!!(formik.errors.cpf && formik.touched.cpf)}
                     errorBorderColor="red.300"
+                    required
                   />
                   {formik.errors.cpf && formik.touched.cpf && (
                     <FormErrorMessage>{formik.errors.cpf}</FormErrorMessage>
@@ -120,6 +122,7 @@ export default function EditProfile() {
                     variant="filled"
                     onChange={formik.handleChange}
                     value={formik.values.sexo}
+                    required
                   >
                     {options.map(option => (
                       <option key={option} value={option.toLowerCase()}>
@@ -164,6 +167,7 @@ export default function EditProfile() {
                     variant="filled"
                     onChange={formik.handleChange}
                     value={formik.values.telefone}
+                    required
                   />
                 </FormControl>
                 <FormControl>
@@ -192,6 +196,7 @@ export default function EditProfile() {
                     variant="filled"
                     onChange={formik.handleChange}
                     value={formik.values.telefone}
+                    required
                   />
                 </FormControl>
                 <FormControl>
@@ -206,6 +211,7 @@ export default function EditProfile() {
                     variant="filled"
                     onChange={formik.handleChange}
                     value={formik.values.telefoneadicional}
+                    required
                   />
                 </FormControl>
               </Flex>

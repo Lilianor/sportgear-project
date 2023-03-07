@@ -6,10 +6,19 @@ import {
   FiUser,
   FiAlignJustify
 } from 'react-icons/fi';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  Button
+} from '@chakra-ui/react';
 import Link from '../Link';
 import styles from './Header.module.scss';
 
-function Header() {
+export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
@@ -17,6 +26,12 @@ function Header() {
     localStorage.getItem('cartProducts') || ''
   );
   const totalProductsInCart = storageProducts.length;
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLoginClick = () => {
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -49,15 +64,46 @@ function Header() {
               </a>
             </li>
             <li>
-              <a href={loggedIn ? "/register" : "login"}>
+              <a onClick={handleLoginClick}>
                 <FiUser />
                 <span>
                   {loggedIn ? 'Minha conta' : ' Faça seu login '}
                   <br />
-                  <span className={styles.span}>{' ou cadastre-se'}</span> 
+                  <span className={styles.span}>{' ou cadastre-se'}</span>
                 </span>
               </a>
             </li>
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Já possui uma conta?</ModalHeader>
+                <ModalBody>
+                  <form>
+                    <label htmlFor="email">E-mail</label>
+                    <input className={styles.input} type="email" id="email" /> <br />
+                    <label htmlFor="password">Senha</label>
+                    <input className={styles.input} type="password" id="password" />
+                  </form>
+                </ModalBody>
+                <ModalFooter>
+                  <Button
+                    colorScheme="green" w="100%"
+                    onClick={() => console.log('Criar cadastro')}
+                  >
+                    Entrar
+                  </Button>
+                </ModalFooter>
+                <ModalHeader>Ainda não é cadastrado?</ModalHeader>
+                <ModalFooter>
+                  <Button 
+                    colorScheme="green" w="100%"
+                    onClick={() => console.log('Criar cadastro')}
+                  >
+                    Criar cadastro
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
           </ul>
           <ul className={styles.iconsWrapperMobile}>
             <li
@@ -85,5 +131,3 @@ function Header() {
     </>
   );
 }
-
-export default Header;

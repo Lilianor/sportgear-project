@@ -114,3 +114,18 @@ a {
   display: flex;
   justify-content: center;
 }
+
+.input {
+ 
+  border: 1px solid #FF5722;
+  display: flex;
+  border-radius: spacing.$spacing-5;
+  padding: spacing.$spacing-5;
+  width: 100%;
+}
+
+.input:focus {
+  background-color: colors.$grey200;
+}
+
+
