@@ -19,6 +19,7 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState<CartProduct[]>(cartProducts);
 
   const removeProduct = (productId: number) => {
+    console.log(productId);
     const updatedItems = cartItems?.filter(item => item._id !== productId);
 
     setCartItems(updatedItems);
@@ -38,13 +39,13 @@ export default function Cart() {
     }));
     const data = { product: orderItems };
     // TODO: Adicionar o token abaixo para fazer o POST do pedido (/card)
-    const token = "SEU_TOKEN_DE_AUTORIZACAO";
+    const token = 'SEU_TOKEN_DE_AUTORIZACAO';
 
     fetch('http://localhost:5000/card', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(data)
     })

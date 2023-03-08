@@ -15,6 +15,7 @@ import {
   ModalBody,
   Button
 } from '@chakra-ui/react';
+import Table from 'react-bootstrap/Table';
 import Link from '../Link';
 import styles from './Header.module.scss';
 
@@ -166,6 +167,7 @@ export default function Header({ isAdmin = false }: HeaderProps) {
             </ul>
           </nav>
         </header>
+      
       </>
     );
   };

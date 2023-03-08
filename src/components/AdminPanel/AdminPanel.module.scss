@@ -1,0 +1,77 @@
+@use '../../styles/colors';
+@use '../../styles/spacing';
+
+.text {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 100px;
+  gap: 10px;
+  padding-bottom: spacing.$spacing-10;
+  font-size: 1.8rem;
+  font-weight: bold;
+
+  & h3 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  width: spacing.$spacing-150;
+  background-color: colors.$white;
+  color: colors.$black;
+  border: 1px solid;
+  padding: spacing.$spacing-5;
+}
+.links {
+  display: flex;
+  gap: 20px;
+  padding: 20px 100px;
+}
+
+.links a:hover {
+  background-color: colors.$grey200;
+}
+
+.btnstyle {
+  margin: 20px 0 0 100px;
+  color: colors.$orange;
+  border: 1px solid;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin: 50px 100px;
+}
+
+th {
+  border: 1px solid black;
+  padding: 10px;
+  background-color: colors.$grey200;
+}
+
+td {
+  padding: 5px 90px;
+  border: 1px solid;
+}
+
+.buttons {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.button {
+  color: colors.$black;
+  padding: 3px 20px;
+  display: flex;
+  background-color: colors.$grey;
+  border-radius: 5px;
+}
+
+.actions {
+  width: 50%;
+}

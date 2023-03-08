@@ -117,7 +117,7 @@ a {
   right: -10px;
   width: 16px;
   border-radius: 50%;
-  background-color: #FF5722;
+  background-color: #ff5722;
   color: white;
   font-size: 10px;
   font-weight: 700;
@@ -126,8 +126,7 @@ a {
 }
 
 .input {
- 
-  border: 1px solid #FF5722;
+  border: 1px solid #ff5722;
   display: flex;
   border-radius: spacing.$spacing-5;
   padding: spacing.$spacing-5;
@@ -137,5 +136,7 @@ a {
 .input:focus {
   background-color: colors.$grey200;
 }
+
+
 
 
