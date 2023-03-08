@@ -7,6 +7,7 @@ import Success from './pages/Success';
 import Requests from "./pages/Requests";
 import EditProfile from "./pages/EditProfile";
 import Register from "./pages/Register";
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/requests" element={<Requests />} />
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
