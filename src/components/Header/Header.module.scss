@@ -137,6 +137,12 @@ a {
   background-color: colors.$grey200;
 }
 
+.alignMenuItems {
+  display: flex;
+  align-items: center;
+  gap: spacing.$spacing-20;
+}
+
 
 
 

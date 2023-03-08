@@ -1,21 +1,11 @@
 import { useState, useEffect } from 'react';
 import logo from '../../assets/images/SportGear.png';
 import {
-  FiSearch,
   FiShoppingCart,
   FiUser,
   FiAlignJustify
 } from 'react-icons/fi';
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  Button
-} from '@chakra-ui/react';
-import Table from 'react-bootstrap/Table';
+import ModalLogin from '../ModalLogin';
 import Link from '../Link';
 import styles from './Header.module.scss';
 
@@ -25,18 +15,21 @@ interface HeaderProps {
 
 export default function Header({ isAdmin = false }: HeaderProps) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+  
+  const storageProducts = localStorage.getItem('cartProducts');
+  const cartProducts = storageProducts ? JSON.parse(storageProducts) : [];
+  const totalProductsInCart = cartProducts.length;
 
-  const storageProducts = JSON.parse(
-    localStorage.getItem('cartProducts') || ''
-  );
-  const totalProductsInCart = storageProducts.length;
+  const handleLogOut = () => {
+    localStorage.removeItem('isLoggedIn');
+    setIsUserLoggedIn(false);
+  }
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleLoginClick = () => {
-    setIsOpen(true);
-  };
+  useEffect(() => {
+    setIsUserLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
+  }, [isModalOpen]);
 
   const RegularHeader = () => {
     return (
@@ -55,11 +48,6 @@ export default function Header({ isAdmin = false }: HeaderProps) {
           <nav className={styles.navWrapper}>
             <ul className={styles.iconsWrapper}>
               <li>
-                <a href=".">
-                  <FiSearch />
-                </a>
-              </li>
-              <li>
                 <a href="/cart" className={styles.countWrapper}>
                   <FiShoppingCart />
                   {totalProductsInCart > 0 && (
@@ -70,64 +58,22 @@ export default function Header({ isAdmin = false }: HeaderProps) {
                 </a>
               </li>
               <li>
-                <a onClick={handleLoginClick}>
-                  <FiUser />
-                  <span>
-                    {loggedIn ? 'Minha conta' : ' Faça seu login '}
-                    <br />
-                    <span className={styles.span}>{' ou cadastre-se'}</span>
-                  </span>
-                </a>
+                <div className={styles.alignMenuItems}>
+                  {isUserLoggedIn ? (
+                    <div className={styles.alignMenuItems}>
+                      <Link className={styles.alignMenuItems} redirect="/editprofile">
+                        <FiUser />
+                        <span>Minha conta</span>
+                      </Link>
+                      <Link onClick={handleLogOut} redirect="/">Sair</Link>
+                    </div>
+                  ) : <button onClick={() => setIsModalOpen(true)}>Login</button>}
+                </div>
               </li>
-              <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>Já possui uma conta?</ModalHeader>
-                  <ModalBody>
-                    <form>
-                      <label htmlFor="email">E-mail</label>
-                      <input
-                        className={styles.input}
-                        type="email"
-                        id="email"
-                      />{' '}
-                      <br />
-                      <label htmlFor="password">Senha</label>
-                      <input
-                        className={styles.input}
-                        type="password"
-                        id="password"
-                      />
-                    </form>
-                  </ModalBody>
-                  <ModalFooter>
-                    <Button
-                      colorScheme="green"
-                      w="100%"
-                      onClick={() => console.log('Criar cadastro')}
-                    >
-                      Entrar
-                    </Button>
-                  </ModalFooter>
-                  <ModalHeader>Ainda não é cadastrado?</ModalHeader>
-                  <ModalFooter>
-                    <Button
-                      colorScheme="green"
-                      w="100%"
-                      onClick={() => console.log('Criar cadastro')}
-                    >
-                      Criar cadastro
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
+              <ModalLogin isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
             </ul>
             <ul className={styles.iconsWrapperMobile}>
-              <li
-                onClick={() => {
-                  setShowMobileMenu(!showMobileMenu);
-                }}
-              >
+              <li onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 <FiAlignJustify />
               </li>
             </ul>

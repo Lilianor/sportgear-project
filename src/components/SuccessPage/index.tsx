@@ -9,6 +9,7 @@ interface CartProduct {
 }
 
 export default function SuccessPage() {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
   const localStorageItems = localStorage.getItem('cartProducts');
   const cartProducts = localStorageItems ? JSON.parse(localStorageItems) : [];
 
@@ -24,7 +25,7 @@ export default function SuccessPage() {
               <div>
                 <img
                   className={styles.images}
-                  src={`http://localhost:5000/images/product/${product.images}`}
+                  src={`${serverUrl}/images/product/${product.images}`}
                   alt={product.alt}
                 />
               </div>

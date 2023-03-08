@@ -13,6 +13,7 @@ interface Product {
 }
 
 export default function ProductsList() {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
   const [currentPage, setCurrentPage] = useState(0);
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -35,7 +36,7 @@ export default function ProductsList() {
     : [];
 
   const fetchProducts = async () => {
-    fetch('http://localhost:5000/product')
+    fetch(`${serverUrl}/product`)
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error(error));
@@ -71,7 +72,7 @@ export default function ProductsList() {
                   <div className={styles.itemProduto}>
                     <img
                       className={styles.image}
-                      src={`http://localhost:5000/images/product/${product.images}`}
+                      src={`${serverUrl}/images/product/${product.images}`}
                     />
                     <h3> {product.name} </h3>
                     <p>R$ {product.price}</p>

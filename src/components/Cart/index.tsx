@@ -12,6 +12,7 @@ interface CartProduct {
 }
 
 export default function Cart() {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
   const localStorageItems = localStorage.getItem('cartProducts');
   const cartProducts = localStorageItems ? JSON.parse(localStorageItems) : [];
 
@@ -41,7 +42,7 @@ export default function Cart() {
     // TODO: Adicionar o token abaixo para fazer o POST do pedido (/card)
     const token = 'SEU_TOKEN_DE_AUTORIZACAO';
 
-    fetch('http://localhost:5000/card', {
+    fetch(`${serverUrl}/card`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ export default function Cart() {
             <div key={_id} className={styles.boxCart}>
               <div className={styles.img}>
                 <img
-                  src={`http://localhost:5000/images/product/${images}`}
+                  src={`${serverUrl}/images/product/${images}`}
                   alt=""
                 />
               </div>

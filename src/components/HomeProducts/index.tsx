@@ -13,10 +13,11 @@ interface Product {
 }
 
 export default function HomeProducts() {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
   const [products, setProducts] = useState<Product[]>([]);
 
   const fetchProducts = async () => {
-    fetch('http://localhost:5000/product')
+    fetch(`${serverUrl}/product`)
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error(error));
@@ -38,7 +39,7 @@ export default function HomeProducts() {
               <Card className={styles.card}>
                 <Card.Img
                   className={styles.cardImage}
-                  src={`http://localhost:5000/images/product/${product.images}`}
+                  src={`${serverUrl}/images/product/${product.images}`}
                 />
                 <Card.Body className={styles.cardBody}>
                   <Card.Title className={styles.cardTitle}>

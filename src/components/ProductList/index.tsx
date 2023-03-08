@@ -14,8 +14,8 @@ interface Product {
 
 export default function ProductList() {
   const { id } = useParams();
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
   const [product, setProduct] = useState<Product>();
-  console.log(product);
 
   const addToCart = () => {
     const storageProducts = JSON.parse(
@@ -26,7 +26,7 @@ export default function ProductList() {
   };
 
   const fetchProduct = async () => {
-    fetch(`http://localhost:5000/product/${id}`)
+    fetch(`${serverUrl}/product/${id}`)
       .then(response => response.json())
       .then(data => setProduct(data))
       .catch(error => console.error(error));
@@ -42,7 +42,7 @@ export default function ProductList() {
         {product && (
           <div className={styles.box}>
             <div className="styles.image">
-              <img src={`http://localhost:5000/images/product/${product.images}`} alt="" />
+              <img src={`${serverUrl}/images/product/${product.images}`} alt="" />
             </div>
             <div className={styles.description}>
               <div>

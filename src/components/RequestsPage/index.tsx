@@ -13,10 +13,11 @@ interface Product {
 }
 
 export default function RequestsPage() {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
   const [products, setProducts] = useState<Product[]>([]);
 
   const fetchProducts = async () => {
-    fetch('http://localhost:5000/product')
+    fetch(`${serverUrl}/product`)
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error(error));
@@ -32,7 +33,7 @@ export default function RequestsPage() {
         return (
           <div className={styles.box}>
             <div className="styles.image">
-              <img src={`http://localhost:5000/images/product/${product.images}`} />
+              <img src={`${serverUrl}/images/product/${product.images}`} alt={product.name} />
             </div>
             <div className={styles.description}>
               <div>
