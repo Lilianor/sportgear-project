@@ -25,8 +25,8 @@ interface UpdateUserProps {
   birth?: string | null;
   phone: string;
   password: string;
-  newPassword: string;
-  confirmNewPassword: string;
+  newpassword: string;
+  confirmpassword: string;
 }
 
 const EditProfileSchema = Yup.object({
@@ -65,8 +65,8 @@ export default function EditProfile() {
         birth: values.dateOfBirth ? values.dateOfBirth : '',
         phone: values.phone ? values.phone : '',
         password: values.password ? values.password : '',
-        newPassword: values.newPassword ? values.newPassword : '',
-        confirmNewPassword: values.confirmNewPassword ? values.confirmNewPassword : '',
+        newpassword: values.newPassword ? values.newPassword : '',
+        confirmpassword: values.confirmNewPassword ? values.confirmNewPassword : '',
       };
       try {
         const responseData = await updateUser(formData);
