@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useFormik } from 'formik';
@@ -14,7 +15,6 @@ import {
   useToast
 } from '@chakra-ui/react';
 import styles from './Register.module.scss';
-import { useNavigate } from 'react-router-dom';
 
 interface FetchProps {
   name: string;
@@ -84,6 +84,7 @@ export default function EditProfile() {
           });
           formik.setSubmitting(false);
           formik.setStatus({ isSuccess: true });
+          localStorage.setItem('userData', JSON.stringify(formData));
           
           toast({
             title: 'Cadastro realizado com sucesso.',

@@ -1,3 +1,6 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useFormik } from 'formik';
@@ -9,30 +12,142 @@ import {
   Input,
   VStack,
   FormErrorMessage,
-  Select
+  Select,
+  useToast
 } from '@chakra-ui/react';
 import styles from './EditProfile.module.scss';
 
-export default function CustomerForm() {
+interface UpdateUserProps {
+  name: string;
+  cpf: string;
+  rg?: string | null;
+  gender: string;
+  birth?: string | null;
+  phone: string;
+  password: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
+const EditProfileSchema = Yup.object({
+  newPassword: Yup.string(),
+  confirmNewPassword: Yup.string()
+    .test('passwords-match', 'Os valores da senhas devem ser iguais', function(value){
+      return this.parent.newPassword === value
+    })
+});
+
+export default function EditProfile() {
+  const [userId, setUserId] = useState<string>('');
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const navigate = useNavigate();
+  const toast = useToast();
+
   const formik = useFormik({
     initialValues: {
       name: '',
       cpf: '',
       rg: '',
-      sexo: '',
-      datanascimento: '',
-      telefone: '',
-      telefoneadicional: '',
-      senhaatual: '',
-      alterarsenha: ''
+      gender: '',
+      dateOfBirth: '',
+      phone: '',
+      password: '',
+      newPassword: '',
+      confirmNewPassword: '',
     },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    validationSchema: EditProfileSchema,
+    onSubmit: async values => {
+      const formData = {
+        name: values.name ? values.name : '',
+        cpf: values.cpf ? values.cpf : '',
+        rg: values.rg ? values.rg : '',
+        gender: values.gender ? values.gender : '',
+        birth: values.dateOfBirth ? values.dateOfBirth : '',
+        phone: values.phone ? values.phone : '',
+        password: values.password ? values.password : '',
+        newPassword: values.newPassword ? values.newPassword : '',
+        confirmNewPassword: values.confirmNewPassword ? values.confirmNewPassword : '',
+      };
+      try {
+        const responseData = await updateUser(formData);
+        if (responseData === 'Usuário atualizado com sucesso!') {
+          formik.setSubmitting(false);
+          formik.setStatus({ isSuccess: true });
+          toast({
+            title: 'Sucesso',
+            description: "Dados atualizados com sucesso.",
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          });
+          navigate('/products');
+         } else {
+          toast({
+            title: 'Erro ao atualizar cadastro.',
+            description: "Verifique se os seus dados estão corretos.",
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   });
 
   const inputBackground = { background: 'gray.200' };
   const options = ['Feminino', 'Masculino'];
+
+  const loadUserData = async () => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const response = await fetch(`${serverUrl}/user/check`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (data) {
+        formik.setValues({
+          name: data.name,
+          cpf: data.cpf,
+          rg: data.rg ? data.rg : '',
+          gender: data.gender,
+          dateOfBirth: data.birth ? data.birth : '',
+          phone: data.phone,
+          password: '',
+          newPassword: '',
+          confirmNewPassword: '',
+        });
+        localStorage.setItem('userData', JSON.stringify(data));
+        setUserId(data._id);
+      }
+    } else {
+      localStorage.removeItem('isLoggedIn');
+      navigate('/');
+    }
+  };
+
+  const updateUser = async (data: UpdateUserProps) => {
+    const response = await fetch(`${serverUrl}/user/${userId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(data)
+    });
+  
+    return await response.json();
+  };
+
+  useEffect(() => {
+    loadUserData();
+  }, []);
 
   return (
     <div>
@@ -48,7 +163,7 @@ export default function CustomerForm() {
                   sx={inputBackground}
                   id="name"
                   name="name"
-                  type="name"
+                  type="text"
                   variant="filled"
                   onChange={formik.handleChange}
                   value={formik.values.name}
@@ -61,7 +176,7 @@ export default function CustomerForm() {
                     sx={inputBackground}
                     id="cpf"
                     name="cpf"
-                    type="cpf"
+                    type="number"
                     variant="filled"
                     maxLength={11}
                     onChange={e => {
@@ -89,7 +204,7 @@ export default function CustomerForm() {
                     sx={inputBackground}
                     id="rg"
                     name="rg"
-                    type="rg"
+                    type="number"
                     variant="filled"
                     onChange={formik.handleChange}
                     value={formik.values.rg}
@@ -98,15 +213,15 @@ export default function CustomerForm() {
               </Flex>
               <Flex className={styles.flex}>
                 <FormControl>
-                  <FormLabel htmlFor="sexo">Sexo</FormLabel>
+                  <FormLabel htmlFor="gender">Sexo</FormLabel>
                   <Select
                     sx={inputBackground}
-                    id="sexo"
-                    name="sexo"
+                    id="gender"
+                    name="gender"
                     placeholder="Selecione uma opção"
                     variant="filled"
                     onChange={formik.handleChange}
-                    value={formik.values.sexo}
+                    value={formik.values.gender}
                   >
                     {options.map(option => (
                       <option key={option} value={option.toLowerCase()}>
@@ -116,19 +231,19 @@ export default function CustomerForm() {
                   </Select>
                 </FormControl>
                 <FormControl>
-                  <FormLabel htmlFor="datanascimento">
+                  <FormLabel htmlFor="dateOfBirth">
                     Data de nascimento
                   </FormLabel>
                   <DatePicker
-                    id="datanascimento"
-                    name="datanascimento"
+                    id="dateOfBirth"
+                    name="dateOfBirth"
                     selected={
-                      formik.values.datanascimento
-                        ? new Date(formik.values.datanascimento)
+                      formik.values.dateOfBirth
+                        ? new Date(formik.values.dateOfBirth)
                         : null
                     }
                     onChange={(date: Date) =>
-                      formik.setFieldValue('datanascimento', date)
+                      formik.setFieldValue('dateOfBirth', date)
                     }
                     dateFormat="dd/MM/yyyy"
                     showYearDropdown
@@ -142,58 +257,63 @@ export default function CustomerForm() {
 
               <Flex className={styles.flex}>
                 <FormControl>
-                  <FormLabel htmlFor="telefone">Telefone</FormLabel>
+                  <FormLabel htmlFor="phone">Telefone</FormLabel>
                   <Input
                     sx={inputBackground}
-                    id="telefone"
-                    name="telefone"
-                    type="telefone"
+                    id="phone"
+                    name="phone"
+                    type="number"
                     variant="filled"
                     onChange={formik.handleChange}
-                    value={formik.values.telefone}
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel htmlFor="telefoneadicional">
-                    Telefone Adicional
-                  </FormLabel>
-                  <Input
-                    sx={inputBackground}
-                    id="telefoneadicional"
-                    name="telefoneadicional"
-                    type="telefoneadicional"
-                    variant="filled"
-                    onChange={formik.handleChange}
-                    value={formik.values.telefoneadicional}
+                    value={formik.values.phone}
                   />
                 </FormControl>
               </Flex>
               <Flex className={styles.flex}>
                 <FormControl>
-                  <FormLabel htmlFor="senhaatual">Senha atual</FormLabel>
+                  <FormLabel htmlFor="password">Senha atual</FormLabel>
                   <Input
                     sx={inputBackground}
-                    id="senhaatual"
-                    name="senhaatual"
-                    type="senhaatual"
+                    id="password"
+                    name="password"
+                    type="password"
                     variant="filled"
                     onChange={formik.handleChange}
-                    value={formik.values.senhaatual}
+                    value={formik.values.password}
                   />
                 </FormControl>
                 <FormControl>
-                  <FormLabel htmlFor="alterarsenha">
-                    Alterar Senha
+                  <FormLabel htmlFor="newPassword">
+                    Nova senha
                   </FormLabel>
                   <Input
                     sx={inputBackground}
-                    id="alterarsenha"
-                    name="alterarsenha"
-                    type="alterarsenha"
+                    id="newPassword"
+                    name="newPassword"
+                    type="password"
                     variant="filled"
                     onChange={formik.handleChange}
-                    value={formik.values.alterarsenha}
+                    value={formik.values.newPassword}
+                    isInvalid={!!formik.errors.confirmNewPassword}
                   />
+                </FormControl>
+                <FormControl>
+                  <FormLabel htmlFor="confirmNewPassword">
+                    Confirmar nova senha
+                  </FormLabel>
+                  <Input
+                    sx={inputBackground}
+                    id="confirmNewPassword"
+                    name="confirmNewPassword"
+                    type="password"
+                    variant="filled"
+                    onChange={formik.handleChange}
+                    value={formik.values.confirmNewPassword}
+                    isInvalid={!!formik.errors.confirmNewPassword}
+                  />
+                  {formik.errors.confirmNewPassword && (
+                    <div className={styles.errorMessage}>{formik.errors.confirmNewPassword}</div>
+                  )}
                 </FormControl>
               </Flex>
               <button className={styles.button} type="submit">
