@@ -55,3 +55,9 @@
   padding: spacing.$spacing-12 spacing.$spacing-25;
   width: 100%;
 }
+
+.errorMessage {
+  padding-top: spacing.$spacing-10;
+  color: colors.$red;
+  font-weight: 600;
+}

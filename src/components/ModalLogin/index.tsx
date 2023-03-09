@@ -8,12 +8,13 @@ import {
   ModalBody,
   Button,
   Input,
-  Link,
   useToast,
   Spinner,
   Flex,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
+import Link from '../Link';
+import styles from "./ModalLogin.module.scss"
 
 interface ModalLoginProps {
   isOpen: boolean;
@@ -139,7 +140,7 @@ export default function ModalLogin({ isOpen, setIsOpen }: ModalLoginProps) {
         </form>
         <ModalHeader>Ainda não é cadastrado?</ModalHeader>
         <ModalFooter>
-          <Link href='/register' sx={{ width: "100%" }}>
+          <Link redirect='/register' className={styles.link}>
             <Button
               colorScheme="green"
               w="100%"
