@@ -7,7 +7,7 @@ export default function Success() {
   return (
     <>
       <Header />
-      <Navigation title="CARRINHO" />
+      <Navigation title="PEDIDO" />
       <SuccessPage />
       <Footer />
     </>

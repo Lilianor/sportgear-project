@@ -78,8 +78,8 @@ a {
 
   @media screen and (max-width: 880px) {
     display: block;
-    color: colors.$white;
     list-style: none;
+    color: colors.$green;
   }
 }
 
@@ -142,7 +142,3 @@ a {
   align-items: center;
   gap: spacing.$spacing-20;
 }
-
-
-
-
