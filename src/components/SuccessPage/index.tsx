@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styles from './SuccessPage.module.scss';
 
 interface CartProduct {
@@ -7,11 +9,16 @@ interface CartProduct {
   name: string;
   price: number;
 }
-
 export default function SuccessPage() {
+  const { id } = useParams();
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const localStorageItems = localStorage.getItem('cartProducts');
   const cartProducts = localStorageItems ? JSON.parse(localStorageItems) : [];
+  const [products, setProducts] = useState(cartProducts);
+
+  useEffect(() => {
+    localStorage.removeItem('cartProducts');
+  }, [id])
 
   return (
     <main className={styles.main}>
@@ -19,7 +26,7 @@ export default function SuccessPage() {
         <h1>Compra realizada com sucesso ;)</h1>
       </div>
       <div className={styles.description}>
-        {cartProducts.map((product: CartProduct) => {
+        {products?.map((product: CartProduct) => {
           return (
             <div className={styles.box} key={product.id}>
               <div>

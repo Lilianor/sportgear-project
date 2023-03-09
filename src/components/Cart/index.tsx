@@ -1,10 +1,12 @@
+import { useToast } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import Button from '../Button';
+import { useNavigate } from 'react-router-dom';
 import Link from '../Link';
 import styles from './Cart.module.scss';
 
 interface CartProduct {
-  _id: number;
+  cartId: string;
+  _id: string;
   images: string;
   alt: string;
   name: string;
@@ -13,15 +15,19 @@ interface CartProduct {
 
 export default function Cart() {
   const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const localStorageItems = localStorage.getItem('cartProducts');
   const cartProducts = localStorageItems ? JSON.parse(localStorageItems) : [];
 
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState<CartProduct[]>(cartProducts);
 
-  const removeProduct = (productId: number) => {
-    console.log(productId);
-    const updatedItems = cartItems?.filter(item => item._id !== productId);
+  const token = localStorage.getItem('token');
+
+  const removeProduct = (cartId: string) => {
+    const updatedItems = cartItems?.filter(item => item.cartId !== cartId);
 
     setCartItems(updatedItems);
     localStorage.setItem('cartProducts', JSON.stringify(updatedItems));
@@ -34,13 +40,21 @@ export default function Cart() {
   };
 
   const createOrder = () => {
+    if (!token) {
+      toast({
+        title: 'Usuário não autenticado.',
+        description: "Por favor realize o login ou cadastro antes de prosseguir com a compra.",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+
     const orderItems = cartProducts.map((product: CartProduct) => ({
       productsId: product._id,
       amount: 1
     }));
     const data = { product: orderItems };
-    // TODO: Adicionar o token abaixo para fazer o POST do pedido (/card)
-    const token = 'SEU_TOKEN_DE_AUTORIZACAO';
 
     fetch(`${serverUrl}/card`, {
       method: 'POST',
@@ -52,12 +66,24 @@ export default function Cart() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        // TODO: Limpar o carrinho (se chegou aqui é pq deu bom)
+        toast({
+          title: 'Sucesso.',
+          description: "Compra realizada com sucesso, obrigado.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+        navigate(`/success/${data._id}`);
       })
       .catch(error => {
         console.error(error);
-        // TODO: Mandar uma mensagem de erro dizendo que deu ruim
+        toast({
+          title: 'Oops.',
+          description: "Ocorreu um erro, por favor tente novamente.",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
       });
   };
 
@@ -73,9 +99,9 @@ export default function Cart() {
     <main className={styles.shoppingCart}>
       <div className={styles.cart}>
         {cartItems.map(product => {
-          const { _id, images, name, price } = product;
+          const { cartId, images, name, price } = product;
           return (
-            <div key={_id} className={styles.boxCart}>
+            <div key={cartId} className={styles.boxCart}>
               <div className={styles.img}>
                 <img
                   src={`${serverUrl}/images/product/${images}`}
@@ -85,11 +111,7 @@ export default function Cart() {
               <div className={styles.text}>
                 <h3>{name}</h3>
                 <p>R$ {price || '0.00'}</p>
-                <Button
-                  title="Excluir"
-                  className={styles.btnStyle}
-                  onClick={() => removeProduct(_id)}
-                />
+                <button className={styles.btnStyle} onClick={() => removeProduct(product.cartId)}>Excluir</button>
               </div>
             </div>
           );
@@ -103,8 +125,6 @@ export default function Cart() {
         <div>
           <Link
             texto="Finalizar Compra"
-            // TODO: depois de testar que o pedido está sendo cadastrado, descomentar a linha abaixo (para mandar para a pagina de sucesso)
-            redirect="success"
             className={styles.btn}
             onClick={createOrder}
           />

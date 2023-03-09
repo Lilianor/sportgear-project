@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import * as uuid from 'uuid';
 import styles from './ProductList.module.scss';
 
 interface Product {
@@ -17,11 +18,18 @@ export default function ProductList() {
   const [product, setProduct] = useState<Product>();
   const navigate = useNavigate();
 
+  const localStorageItems = localStorage.getItem('cartProducts');
+  const cartItems = localStorageItems ? JSON.parse(localStorageItems) : [];
+
   const addToCart = () => {
-    const storageProducts = localStorage.getItem('cartProducts');
-    const cartProducts = storageProducts ? JSON.parse(storageProducts) : [];
-    cartProducts.push(product);
-    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    const productWithCartId = {
+      ...product,
+      cartId: uuid.v4(),
+      amount: 1,
+    };
+
+    const updatedCartItems = [...cartItems, productWithCartId];
+    localStorage.setItem('cartProducts', JSON.stringify(updatedCartItems));
     navigate('/cart');
   };
 
