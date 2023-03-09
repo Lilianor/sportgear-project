@@ -28,12 +28,12 @@ export default function HomeProducts() {
   }, []);
 
   return (
-        <section className={styles.sectionCards}>
-        <div className={styles.h1}>
+    <section className={styles.sectionCards}>
+      <div className={styles.h1}>
         <h1>Nossos Produtos</h1>
       </div>
       <div className={styles.boxWrapper}>
-        {products.map(product => {
+        {products.slice(0, 3).map(product => {
           return (
             <div className={styles.container}>
               <Card className={styles.card}>
@@ -52,10 +52,10 @@ export default function HomeProducts() {
                   />
                 </Card.Body>
               </Card>
-        </div>
+            </div>
           );
         })}
-        </div>
+      </div>
     </section>
   );
 }

@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import logo from '../../assets/images/SportGear.png';
-import {
-  FiShoppingCart,
-  FiUser,
-  FiAlignJustify
-} from 'react-icons/fi';
+import { FiShoppingCart, FiUser, FiAlignJustify } from 'react-icons/fi';
 import ModalLogin from '../ModalLogin';
 import Link from '../Link';
 import styles from './Header.module.scss';
@@ -16,8 +12,10 @@ interface HeaderProps {
 export default function Header({ isAdmin = false }: HeaderProps) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
-  
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(
+    localStorage.getItem('isLoggedIn') === 'true'
+  );
+
   const storageProducts = localStorage.getItem('cartProducts');
   const cartProducts = storageProducts ? JSON.parse(storageProducts) : [];
   const totalProductsInCart = cartProducts.length;
@@ -25,7 +23,7 @@ export default function Header({ isAdmin = false }: HeaderProps) {
   const handleLogOut = () => {
     localStorage.removeItem('isLoggedIn');
     setIsUserLoggedIn(false);
-  }
+  };
 
   useEffect(() => {
     setIsUserLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
@@ -61,13 +59,23 @@ export default function Header({ isAdmin = false }: HeaderProps) {
                 <div className={styles.alignMenuItems}>
                   {isUserLoggedIn ? (
                     <div className={styles.alignMenuItems}>
-                      <Link className={styles.alignMenuItems} redirect="/editprofile">
+                      <Link
+                        className={styles.alignMenuItems}
+                        redirect="/editprofile"
+                      >
                         <FiUser />
                         <span>Minha conta</span>
                       </Link>
-                      <Link onClick={handleLogOut} redirect="/">Sair</Link>
+                      <Link redirect="/requests">
+                        <span>Meus pedidos</span>
+                      </Link>
+                      <Link onClick={handleLogOut} redirect="/">
+                        Sair
+                      </Link>
                     </div>
-                  ) : <button onClick={() => setIsModalOpen(true)}>Login</button>}
+                  ) : (
+                    <button onClick={() => setIsModalOpen(true)}>Login</button>
+                  )}
                 </div>
               </li>
               <ModalLogin isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
@@ -108,12 +116,11 @@ export default function Header({ isAdmin = false }: HeaderProps) {
             <ul className={styles.iconsWrapper}>
               <li>Painel Administrativo</li>
               <li>
-                <a href="/logout">Sair</a>
+                <a href="/">Sair</a>
               </li>
             </ul>
           </nav>
         </header>
-      
       </>
     );
   };

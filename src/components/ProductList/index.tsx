@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Link from '../Link';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './ProductList.module.scss';
 
 interface Product {
@@ -16,13 +15,14 @@ export default function ProductList() {
   const { id } = useParams();
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const [product, setProduct] = useState<Product>();
+  const navigate = useNavigate();
 
   const addToCart = () => {
-    const storageProducts = JSON.parse(
-      localStorage.getItem('cartProducts') || ''
-    );
-    storageProducts.push(product);
-    localStorage.setItem('cartProducts', JSON.stringify(storageProducts));
+    const storageProducts = localStorage.getItem('cartProducts');
+    const cartProducts = storageProducts ? JSON.parse(storageProducts) : [];
+    cartProducts.push(product);
+    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    navigate('/cart');
   };
 
   const fetchProduct = async () => {
@@ -55,12 +55,7 @@ export default function ProductList() {
                 <p>{product.description}</p>
               </div>
               <div>
-                <Link
-                  texto="Adicionar ao carrinho"
-                  redirect="/cart"
-                  className={styles.btn}
-                  onClick={addToCart}
-                />
+                <button className={styles.btn} onClick={() => addToCart()}>Adicionar ao carrinho</button>
               </div>
             </div>
           </div>
