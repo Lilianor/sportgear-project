@@ -73,6 +73,7 @@ export default function Cart() {
           duration: 9000,
           isClosable: true,
         });
+        localStorage.removeItem('cartProducts');
         navigate(`/success/${data._id}`);
       })
       .catch(error => {
@@ -137,6 +138,6 @@ export default function Cart() {
           />
         </div>
       </div>
-    </main>
-  );
+    </main>
+  );
 }
