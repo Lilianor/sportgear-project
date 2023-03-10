@@ -54,7 +54,7 @@ export default function ProductsList() {
           <div className={styles.formCheckItem}>
             <ul>
               <li>
-                <Link texto="Evolution" redirect="/products" />
+                <Link texto="Evolution -" redirect="/products" />
               </li>
             </ul>
             <ul>
@@ -74,8 +74,8 @@ export default function ProductsList() {
                       className={styles.image}
                       src={`${serverUrl}/images/product/${product.images}`}
                     />
-                    <h3> {product.name} </h3>
-                    <p>R$ {product.price}</p>
+                    <h3 className={styles.h3}> {product.name} </h3>
+                    <p className={styles.p}>R$ {product.price}</p>
                   </div>
                 </Link>
               );

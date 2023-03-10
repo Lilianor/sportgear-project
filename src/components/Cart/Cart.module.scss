@@ -2,18 +2,26 @@
 @use '../../styles/spacing';
 
 .img {
-  width: spacing.$spacing-150;
-  height: spacing.$spacing-200;
+  width: spacing.$spacing-200;
 }
 
 .price {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: spacing.$spacing-10;
 
   @media (max-width: 768px) {
     align-items: center;
   }
+}
+
+.sun {
+  display: flex;
+  gap: spacing.$spacing-20;
+  font-size: x-large;
+  font-weight: bold;
 }
 
 .main {
@@ -25,9 +33,9 @@
 
 .shoppingCart {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: spacing.$spacing-100;
+  justify-content: center;
+  padding: 6.25rem;
+  gap: 80px;
 
   @media (max-width: 768px) {
     flex-wrap: wrap;
@@ -39,6 +47,7 @@
   display: flex;
   align-items: center;
   gap: spacing.$spacing-30;
+  margin-bottom: spacing.$spacing-30;
 
   @media (max-width: 768px) {
     justify-content: flex-end;
@@ -53,6 +62,7 @@
   width: spacing.$spacing-60;
   padding: spacing.$spacing-3;
   font-size: spacing.$spacing-13;
+  margin-top: spacing.$spacing-20;
 }
 
 .btn {

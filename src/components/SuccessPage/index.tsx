@@ -60,7 +60,7 @@ export default function SuccessPage() {
             </div>
           </div>
         ))}
-        <div>
+        <div className={styles.sun}>
           <h3>TOTAL R$ {order?.priceTotal} </h3>
         </div>
       </div>

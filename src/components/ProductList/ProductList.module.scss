@@ -35,6 +35,11 @@
     padding-bottom: spacing.$spacing-5;
   }
 
+  & p {
+    line-height: 2.0;
+    width: 75%;
+  }
+
   @media (max-width: 768px) {
     align-items: center;
   }
