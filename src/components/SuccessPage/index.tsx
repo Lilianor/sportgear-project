@@ -2,22 +2,43 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './SuccessPage.module.scss';
 
-interface CartProduct {
-  id: number;
-  images: string;
-  alt: string;
+interface Product {
+  description: string;
   name: string;
   price: number;
+  images: string;
 }
+
+interface OrdersProducts {
+  _id: string;
+  amount: number;
+  date: string;
+  productsId: Product;
+}
+
+interface Order {
+  _id: string;
+  priceTotal: number;
+  OrdersProductId: [OrdersProducts];
+}
+
 export default function SuccessPage() {
   const { id } = useParams();
   const serverUrl = process.env.REACT_APP_SERVER_URL;
-  const localStorageItems = localStorage.getItem('cartProducts');
-  const cartProducts = localStorageItems ? JSON.parse(localStorageItems) : [];
-  const [products, setProducts] = useState(cartProducts);
+  const [order, setOrder] = useState<Order>();
+
+  const fetchOrder = async () => {
+    try {
+      const response = await fetch(`${serverUrl}/card/${id}`)
+      const data = await response.json();
+      setOrder(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    localStorage.removeItem('cartProducts');
+    fetchOrder();
   }, [id])
 
   return (
@@ -26,24 +47,23 @@ export default function SuccessPage() {
         <h1>Compra realizada com sucesso ;)</h1>
       </div>
       <div className={styles.description}>
-        {products?.map((product: CartProduct) => {
-          return (
-            <div className={styles.box} key={product.id}>
-              <div>
-                <img
-                  className={styles.images}
-                  src={`${serverUrl}/images/product/${product.images}`}
-                  alt={product.alt}
-                />
+        {order?.OrdersProductId.map(orderProduct => (
+          <div key={orderProduct._id}>
+            <div className={styles.name}>
+              <div className="styles.image">
+                <img src={`${serverUrl}/images/product/${orderProduct.productsId.images}`} alt={orderProduct.productsId.name} />
               </div>
-              <div className={styles.name}>
-                <h3>{product.name}</h3>
-                <p>R$ {product.price}</p>
-              </div>
+              <h3>NOME: {orderProduct.productsId.name}</h3>
+              <h3>QTD: {orderProduct.amount}</h3>
+              <h3>DATA: {new Date(orderProduct.date).toLocaleString('en-GB')}</h3>
+              <h3>R$ {orderProduct.productsId.price}</h3>
             </div>
-          );
-        })}
+          </div>
+        ))}
+        <div>
+          <h3>TOTAL R$ {order?.priceTotal} </h3>
+        </div>
       </div>
-    </main>
-  );
+    </main>
+  );
 }
