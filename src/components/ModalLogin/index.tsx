@@ -38,14 +38,20 @@ export default function ModalLogin({ isOpen, setIsOpen }: ModalLoginProps) {
         const data = await loginUser(values.email, values.password);
 
         if (data.token) {
+          if (data.role === 'admin') localStorage.setItem('isAdmin', 'true');
+          
           localStorage.setItem('token', data.token);
           localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('userId', data.userId);
+          
           formik.setValues({
             email: '',
             password: ''
           });
+
           formik.setSubmitting(false);
           formik.setStatus({ isSuccess: true });
+
           toast({
             title: 'Login realizado com sucesso.',
             description: "Bem vindo novamente ao Sportgear.",
@@ -53,6 +59,7 @@ export default function ModalLogin({ isOpen, setIsOpen }: ModalLoginProps) {
             duration: 9000,
             isClosable: true,
           });
+
           setIsOpen(false);
         } else {
           toast({
@@ -144,13 +151,12 @@ export default function ModalLogin({ isOpen, setIsOpen }: ModalLoginProps) {
             <Button
               colorScheme="green"
               w="100%"
-              onClick={() => console.log('Criar cadastro')}
             >
               Criar cadastro
             </Button>
           </Link>
         </ModalFooter>
       </ModalContent>
-    </Modal>
-  );
+    </Modal>
+  );
 }

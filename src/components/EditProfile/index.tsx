@@ -323,6 +323,6 @@ export default function EditProfile() {
           </form>
         </Box>
       </Flex>
-    </div>
-  );
+    </div>
+  );
 }

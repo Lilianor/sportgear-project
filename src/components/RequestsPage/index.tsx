@@ -3,62 +3,78 @@ import Link from '../Link';
 import styles from './RequestsPage.module.scss';
 
 interface Product {
-  _id: string;
-  images?: string;
+  description: string;
   name: string;
   price: number;
-  description?: string;
-  categoryid?: string;
-  date: '00/00/0000';
+  images: string;
+}
+
+interface OrdersProducts {
+  _id: string;
+  amount: number;
+  date: string;
+  productsId: Product;
+}
+
+interface Order {
+  _id: string;
+  priceTotal: number;
+  OrdersProductId: [OrdersProducts];
 }
 
 export default function RequestsPage() {
   const serverUrl = process.env.REACT_APP_SERVER_URL;
-  const [products, setProducts] = useState<Product[]>([]);
+  const userId = localStorage.getItem('userId');
+  const [orders, setOrders] = useState<Order[]>([]);
 
-  const fetchProducts = async () => {
-    fetch(`${serverUrl}/product`)
-      .then(response => response.json())
-      .then(data => setProducts(data))
-      .catch(error => console.error(error));
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch(`${serverUrl}/card/user/${userId}`);
+      const data = await response.json();
+      console.log(data);
+      setOrders(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchOrders();
   }, []);
 
   return (
     <div className={styles.container}>
-      {products.map(product => {
+      {orders.map(order => {
         return (
           <div className={styles.box}>
-            <div className="styles.image">
-              <img src={`${serverUrl}/images/product/${product.images}`} alt={product.name} />
-            </div>
             <div className={styles.description}>
               <div>
-                <h1>{product.name}</h1>
+                <h3>PEDIDO Nº {order._id} </h3>
               </div>
+              {order.OrdersProductId.map(orderProduct => (
+                <div>
+                  <div className="styles.image">
+                    <img
+                      src={`${serverUrl}/images/product/${orderProduct.productsId.images}`}
+                      alt={orderProduct.productsId.name}
+                    />
+                  </div>
+                  <h3>NOME: {orderProduct.productsId.name}</h3>
+                  <h3>QTD: {orderProduct.amount}</h3>
+                  <h3>
+                    DATA: {new Date(orderProduct.date).toLocaleString('en-GB')}
+                  </h3>
+                  <h3>R$ {orderProduct.productsId.price}</h3>
+                </div>
+              ))}
               <div>
-                <h3>PEDIDO REALIZADO EM: {product.date}</h3>
-              </div>
-              <div>
-                <h3>PEDIDO Nº {product._id} </h3>
-              </div>
-              <div>
-                <h3>TOTAL R$ {product.price} </h3>
-              </div>
-              <div>
-                <Link
-                  texto="Comprar Novamente"
-                  redirect="products"
-                  className={styles.btn}
-                />
+                <h3>TOTAL R$ {order.priceTotal} </h3>
               </div>
             </div>
           </div>
         );
       })}
+         
     </div>
   );
 }

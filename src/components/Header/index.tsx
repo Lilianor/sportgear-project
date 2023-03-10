@@ -15,6 +15,7 @@ export default function Header({ isAdmin = false }: HeaderProps) {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(
     localStorage.getItem('isLoggedIn') === 'true'
   );
+  const isAdminUser = localStorage.getItem('isAdmin') === 'true';
 
   const storageProducts = localStorage.getItem('cartProducts');
   const cartProducts = storageProducts ? JSON.parse(storageProducts) : [];
@@ -22,6 +23,8 @@ export default function Header({ isAdmin = false }: HeaderProps) {
 
   const handleLogOut = () => {
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('isAdmin');
     setIsUserLoggedIn(false);
   };
 
@@ -69,6 +72,11 @@ export default function Header({ isAdmin = false }: HeaderProps) {
                       <Link redirect="/requests">
                         <span>Meus pedidos</span>
                       </Link>
+                      {isAdminUser && (
+                        <Link redirect="/admin">
+                          <span>Painel Administrativo</span>
+                        </Link>
+                      )}
                       <Link onClick={handleLogOut} redirect="/">
                         Sair
                       </Link>
@@ -125,5 +133,5 @@ export default function Header({ isAdmin = false }: HeaderProps) {
     );
   };
 
-  return <>{isAdmin ? <AdminHeader /> : <RegularHeader />}</>;
+  return <>{isAdmin ? <AdminHeader /> : <RegularHeader />}</>;
 }
