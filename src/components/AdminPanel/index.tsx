@@ -67,7 +67,7 @@ function AdminTable({
 }: any) // TODO: type
 {
   const filteredData = data.map((item: DataProps) => {
-    const filteredItem: {[key: string]: any} = {};
+    const filteredItem: { [key: string]: any } = {};
     Object.keys(header).forEach((key: string) => {
       filteredItem[key] = item[key];
     });
@@ -104,7 +104,7 @@ function AdminTable({
           <tr>
             {Object.keys(header).map((item: string) => (
               <th>{header[item]}</th>
-              ))}
+            ))}
             <th className={styles.actions}>Ações</th>
           </tr>
         </thead>
@@ -189,7 +189,7 @@ export default function AdminPanel() {
   useEffect(() => {
     if (selectedId) fetchItemData(selectedId);
   }, [selectedId]);
-  
+
   useEffect(() => {
     fetchListData();
   }, [activeCategory, isOpen]);
@@ -203,33 +203,29 @@ export default function AdminPanel() {
       <div className={styles.links}>
         <button
           onClick={() => setActiveCategory('product')}
-          className={`${styles.btn} ${
-            activeCategory === 'product' && styles.activeButton
-          }`}
+          className={`${styles.btn} ${activeCategory === 'product' && styles.activeButton
+            }`}
         >
           Produtos
         </button>
         <button
           onClick={() => setActiveCategory('category')}
-          className={`${styles.btn} ${
-            activeCategory === 'category' && styles.activeButton
-          }`}
+          className={`${styles.btn} ${activeCategory === 'category' && styles.activeButton
+            }`}
         >
           Categorias
         </button>
         <button
           onClick={() => setActiveCategory('user')}
-          className={`${styles.btn} ${
-            activeCategory === 'user' && styles.activeButton
-          }`}
+          className={`${styles.btn} ${activeCategory === 'user' && styles.activeButton
+            }`}
         >
           Clientes
         </button>
         <button
           onClick={() => setActiveCategory('card')}
-          className={`${styles.btn} ${
-            activeCategory === 'card' && styles.activeButton
-          }`}
+          className={`${styles.btn} ${activeCategory === 'card' && styles.activeButton
+            }`}
         >
           Pedidos
         </button>
@@ -247,7 +243,7 @@ export default function AdminPanel() {
           category={activeCategory}
           setIsOpen={setIsOpen}
           setIsEdit={setIsEdit}
-          setSelectedId={setSelectedId} 
+          setSelectedId={setSelectedId}
         />
       )}
       <ModalAdmin
@@ -259,6 +255,6 @@ export default function AdminPanel() {
         isEdit={isEdit}
         selectedItemData={selectedItemData}
       />
-    </main>
-  );
+    </main>
+  );
 }

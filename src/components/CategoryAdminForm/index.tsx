@@ -14,7 +14,7 @@ export default function CategoryAdminForm({ setIsOpen, data, onClose }: any) {
   });
   const toast = useToast();
   const token = localStorage.getItem('token');
-  
+
   const emptyInitialValues = {
     name: '',
   }
@@ -39,7 +39,7 @@ export default function CategoryAdminForm({ setIsOpen, data, onClose }: any) {
       if (response !== 'Acesso Negado!') {
         formik.setSubmitting(false);
         formik.setStatus({ isSuccess: true });
-  
+
         toast({
           title: 'Sucesso.',
           description: `Sua categoria foi ${operation}.`,
@@ -77,6 +77,6 @@ export default function CategoryAdminForm({ setIsOpen, data, onClose }: any) {
       </FormControl>
       <Button colorScheme="blue" mr={3} type="submit">Salvar</Button>
       <Button onClick={() => onClose()}>Cancelar</Button>
-    </form>
-  );
+    </form>
+  );
 }

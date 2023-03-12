@@ -32,7 +32,7 @@ interface UpdateUserProps {
 const EditProfileSchema = Yup.object({
   newPassword: Yup.string(),
   confirmNewPassword: Yup.string()
-    .test('passwords-match', 'Os valores da senhas devem ser iguais', function(value){
+    .test('passwords-match', 'Os valores da senhas devem ser iguais', function (value) {
       return this.parent.newPassword === value
     })
 });
@@ -81,7 +81,7 @@ export default function EditProfile() {
             isClosable: true,
           });
           navigate('/products');
-         } else {
+        } else {
           toast({
             title: 'Erro ao atualizar cadastro.',
             description: "Verifique se os seus dados estão corretos.",
@@ -141,7 +141,7 @@ export default function EditProfile() {
       },
       body: JSON.stringify(data)
     });
-  
+
     return await response.json();
   };
 
@@ -323,6 +323,6 @@ export default function EditProfile() {
           </form>
         </Box>
       </Flex>
-    </div>
-  );
+    </div>
+  );
 }

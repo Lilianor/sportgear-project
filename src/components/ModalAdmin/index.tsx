@@ -36,6 +36,6 @@ export default function ModalAdmin({ isOpen, setIsOpen, onClose, category, categ
           {category === 'card' && <OrderAdminForm setIsOpen={setIsOpen} data={selectedItemData} onClose={onClose} />}
         </ModalBody>
       </ModalContent>
-    </Modal>
-  );
+    </Modal>
+  );
 }

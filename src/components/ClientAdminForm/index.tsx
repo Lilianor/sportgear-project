@@ -22,21 +22,21 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
     birth: Yup.string(),
     phone: isUpdate ? Yup.string() : Yup.string().required('Telefone é obrigatório'),
     password: isUpdate ? Yup.string() : Yup.string().required('Senha é obrigatório'),
-    confirmpassword: isUpdate ? Yup.string() : Yup.string().test('passwords-match', 'Os valores da senhas devem ser iguais', function(value){
+    confirmpassword: isUpdate ? Yup.string() : Yup.string().test('passwords-match', 'Os valores da senhas devem ser iguais', function (value) {
       return this.parent.password === value
     }),
     gender: isUpdate ? Yup.string() : Yup.string().required('Gênero é obrigatório'),
   });
 
   if (isUpdate) clientSchema.shape({
-    newpassword: Yup.string().test('passwords-match', 'Os valores da senhas devem ser iguais', function(value){
+    newpassword: Yup.string().test('passwords-match', 'Os valores da senhas devem ser iguais', function (value) {
       return this.parent.confirmpassword === value
     }),
   });
 
   const toast = useToast();
   const token = localStorage.getItem('token');
-  
+
   const emptyInitialValues = {
     name: '',
     email: '',
@@ -58,7 +58,7 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
         ...formData,
         cpf: formData.cpf.toString(),
         rg: formData.rg ? formData.rg.toString() : undefined,
-        birth: formData.birth ? new Date(formData.birth).toLocaleDateString('en-US', {timeZone: 'America/Sao_Paulo', month: '2-digit', day: '2-digit', year: 'numeric'}) : undefined,
+        birth: formData.birth ? new Date(formData.birth).toLocaleDateString('en-US', { timeZone: 'America/Sao_Paulo', month: '2-digit', day: '2-digit', year: 'numeric' }) : undefined,
         phone: formData.phone.toString(),
       }
       const submitFormParams = {
@@ -77,7 +77,7 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
       if (response !== 'Acesso Negado!') {
         formik.setSubmitting(false);
         formik.setStatus({ isSuccess: true });
-  
+
         toast({
           title: 'Sucesso.',
           description: `Seu produto foi ${operation}.`,
@@ -244,6 +244,6 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
 
       <Button colorScheme="blue" mr={3} type="submit">Salvar</Button>
       <Button onClick={() => onClose()}>Cancelar</Button>
-    </form>
-  );
+    </form>
+  );
 }

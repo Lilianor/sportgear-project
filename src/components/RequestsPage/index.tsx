@@ -67,6 +67,6 @@ export default function RequestsPage() {
           </div>
         );
       })}
-    </div>
-  );
+    </div>
+  );
 }

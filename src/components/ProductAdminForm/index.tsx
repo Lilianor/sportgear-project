@@ -19,7 +19,7 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
 
   const toast = useToast();
   const token = localStorage.getItem('token');
-  
+
   const emptyInitialValues = {
     name: '',
     price: '',
@@ -49,7 +49,7 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
       if (response !== 'Acesso Negado!') {
         formik.setSubmitting(false);
         formik.setStatus({ isSuccess: true });
-  
+
         toast({
           title: 'Sucesso.',
           description: `Seu produto foi ${operation}.`,
@@ -112,11 +112,12 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
           type="file"
           onChange={(event) => {
             if (event.currentTarget.files) {
-                formik.setFieldValue(
-                    "images",
-                      event.currentTarget.files[0]
-                  );
-            }}}
+              formik.setFieldValue(
+                "images",
+                event.currentTarget.files[0]
+              );
+            }
+          }}
           required={data ? false : true}
         />
       </FormControl>
@@ -132,6 +133,6 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
       </FormControl>
       <Button colorScheme="blue" mr={3} type="submit">Salvar</Button>
       <Button onClick={() => onClose()}>Cancelar</Button>
-    </form>
-  );
+    </form>
+  );
 }
