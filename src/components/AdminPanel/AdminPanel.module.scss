@@ -54,13 +54,13 @@ th {
 }
 
 td {
-  padding: spacing.$spacing-5 spacing.$spacing-117;
+  // padding: spacing.$spacing-5 spacing.$spacing-117;
   border: spacing.$spacing-1 solid;
 }
 
 .buttons {
   display: flex;
-  gap: spacing.$spacing-40;
+  gap: spacing.$spacing-20;
   justify-content: center;
 }
 
@@ -79,9 +79,3 @@ td {
 .actions {
   width: 50%;
 }
-
-
-
-
-
-

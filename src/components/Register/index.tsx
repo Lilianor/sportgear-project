@@ -112,7 +112,7 @@ export default function EditProfile() {
   });
 
   const registerUser = async (data: FetchProps) => {
-    const response = await fetch(`${serverUrl}/user/register`, {
+    const response = await fetch(`${serverUrl}/user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -305,6 +305,6 @@ export default function EditProfile() {
           </form>
         </Box>
       </Flex>
-    </div>
-  );
+    </div>
+  );
 }

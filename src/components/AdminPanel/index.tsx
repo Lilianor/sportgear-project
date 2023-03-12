@@ -1,47 +1,204 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
   Button,
-  Input,
-  useToast,
-  Spinner,
-  Flex,
-  ModalCloseButton,
-  FormControl,
-  FormLabel
 } from '@chakra-ui/react';
 import Table from 'react-bootstrap/Table';
-import Link from '../Link';
+import ModalAdmin from '../ModalAdmin';
 import styles from './AdminPanel.module.scss';
+import { DataProps } from '../../types';
 
 interface CategoryProps {
   category: 'product' | 'category' | 'user' | 'card';
 }
 
-function translateCategory(category: any) {
-  if (category === 'product') return 'Produto';
-  if (category === 'category') return 'Categoria';
-  if (category === 'user') return 'Cliente';
-  if (category === 'card') return 'Pedido';
+const categoryTranslation = {
+  product: 'Produto',
+  category: 'Categoria',
+  user: 'Cliente',
+  card: 'Pedido'
+};
+
+const productFields = {
+  _id: 'Id',
+  name: 'Nome',
+  price: 'Preço',
+};
+
+const categoryFields = {
+  _id: 'Id',
+  name: 'Nome',
+};
+
+const userFields = {
+  _id: 'Id',
+  name: 'Nome',
+  email: 'Email',
+};
+
+const orderFields = {
+  _id: 'Id do Pedido',
+  userId: 'Id do Cliente',
+  priceTotal: 'Preço Total',
+  // OrdersProductId: 'Produtos',
+};
+
+const getHeader = (category: CategoryProps['category']) => {
+  switch (category) {
+    case 'product':
+      return productFields;
+    case 'category':
+      return categoryFields;
+    case 'card':
+      return orderFields;
+    case 'user':
+      return userFields;
+    default:
+      return {};
+  };
+};
+
+function AdminTable({
+  header,
+  data,
+  setData,
+  category,
+  setIsEdit,
+  setSelectedId
+}: any) // TODO: type
+{
+  const filteredData = data.map((item: DataProps) => {
+    const filteredItem: {[key: string]: any} = {};
+    Object.keys(header).forEach((key: string) => {
+      filteredItem[key] = item[key];
+    });
+    return filteredItem;
+  });
+
+  const deleteItem = async (id: string) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/${category}/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      await response.json();
+
+      const filteredData = data.filter((item: DataProps) => item._id !== id);
+      setData(filteredData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editItem = (id: string) => {
+    setIsEdit(true);
+    setSelectedId(id);
+  };
+
+  return (
+    <div className={styles.table}>
+      <Table striped="columns" className={styles.responsiveTable}>
+        <thead>
+          <tr>
+            {Object.keys(header).map((item: string) => (
+              <th>{header[item]}</th>
+              ))}
+            <th className={styles.actions}>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredData.map((item: DataProps) => (
+            <tr key={item._id}>
+              {Object.keys(item).map((key: string) => (
+                <td key={key}>{(key === 'price' || key === 'priceTotal') && 'R$ '}{item[key]}</td>
+              ))}
+              <td>
+                <div className={styles.buttons}>
+                  <div className={styles.button}>
+                    <button onClick={() => editItem(item._id)}>Editar</button>
+                  </div>
+                  <div className={styles.button}>
+                    <button onClick={() => deleteItem(item._id)}>Excluir</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
 }
 
 export default function AdminPanel() {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
   const [isOpen, setIsOpen] = useState(false);
-  const [activeCategory, setActiveCategory] =
-    useState<CategoryProps['category']>('product');
+  const [isEdit, setIsEdit] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
+  const [selectedItemData, setSelectedItemData] = useState<DataProps>();
+  const [activeCategory, setActiveCategory] = useState<CategoryProps['category']>('product');
+  const [data, setData] = useState<DataProps>();
+  const userStorageData = localStorage.getItem('userData');
+  const userData = userStorageData ? JSON.parse(userStorageData) : null;
 
-  // const fetchUrl = `http://localhost:5000/${activeCategory}`;
+  const fetchListData = async () => {
+    try {
+      const response = await fetch(`${serverUrl}/${activeCategory}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchItemData = async (id: string) => {
+    try {
+      const response = await fetch(`${serverUrl}/${activeCategory}/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const data = await response.json();
+      setSelectedItemData(data);
+      setIsOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const registerItem = () => {
+    setIsOpen(true);
+    setIsEdit(false);
+  }
+
+  const onCloseModal = () => {
+    console.log('onCloseModal');
+    setIsOpen(false);
+    setSelectedId(undefined);
+    setSelectedItemData(undefined);
+  }
+
+  useEffect(() => {
+    if (selectedId) fetchItemData(selectedId);
+  }, [selectedId]);
+  
+  useEffect(() => {
+    fetchListData();
+  }, [activeCategory, isOpen]);
 
   return (
     <main>
       <div className={styles.text}>
         <h1>Painel Administrativo</h1>
-        <h3>Bem vindo, admin!</h3>
+        <h3>Bem vindo, {userData?.name}!</h3>
       </div>
       <div className={styles.links}>
         <button
@@ -78,91 +235,30 @@ export default function AdminPanel() {
         </button>
       </div>
       <div>
-        <Button className={styles.btnstyle} onClick={() => setIsOpen(true)}>
-          Cadastrar {translateCategory(activeCategory)}
+        <Button className={styles.btnstyle} onClick={() => registerItem()}>
+          Cadastrar {categoryTranslation[activeCategory]}
         </Button>
       </div>
-
-      <div className={styles.table}>
-        <Table striped="columns" className={styles.responsiveTable}>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Nome</th>
-              <th>Categoria</th>
-              <th>Preço</th>
-              <th className={styles.actions}>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div className={styles.buttons}>
-                  <div className={styles.button}>
-                    <button>Editar</button>
-                  </div>
-                  <div className={styles.button}>
-                    <button>Excluir</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div className={styles.buttons}>
-                  <button className={styles.button}>Editar</button>
-                  <button className={styles.button}>Excluir</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div className={styles.buttons}>
-                  <button className={styles.button}>Editar</button>
-                  <button className={styles.button}>Excluir</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </div>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Criar Cadastro</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              
-              <Input className={styles.input} placeholder="Id" />
-            </FormControl>
-
-            <FormControl mt={4}>
-              
-              <Input className={styles.input} placeholder="Nome" />
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Salvar
-            </Button>
-            <Button onClick={() => setIsOpen(false)}>Cancelar</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </main>
-  );
+      {data && (
+        <AdminTable
+          header={getHeader(activeCategory)}
+          data={data}
+          setData={setData}
+          category={activeCategory}
+          setIsOpen={setIsOpen}
+          setIsEdit={setIsEdit}
+          setSelectedId={setSelectedId} 
+        />
+      )}
+      <ModalAdmin
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onClose={onCloseModal}
+        category={activeCategory}
+        categoryTranslation={categoryTranslation[activeCategory]}
+        isEdit={isEdit}
+        selectedItemData={selectedItemData}
+      />
+    </main>
+  );
 }

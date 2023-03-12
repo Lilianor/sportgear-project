@@ -63,12 +63,18 @@ export default function ProductList() {
                 <p>{product.description}</p>
               </div>
               <div>
+                <h3>PREÇO:</h3>
+              </div>
+              <div>
+                <p>R$ {product.price}</p>
+              </div>
+              <div>
                 <button className={styles.btn} onClick={() => addToCart()}>Adicionar ao carrinho</button>
               </div>
             </div>
           </div>
         )}
       </>
-    </div>
-  );
+    </div>
+  );
 }
