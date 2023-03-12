@@ -8,6 +8,7 @@ import Requests from './pages/Requests';
 import EditProfile from './pages/EditProfile';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
+import About from "./pages/About";
 import Protected from './components/Protected';
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
             </Protected>
           }
         />
+
+        <Route path="/sobre" element={<About/>} />
+
         <Route
           path="/editprofile"
           element={
