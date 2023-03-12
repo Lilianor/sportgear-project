@@ -61,9 +61,10 @@ export default function SuccessPage() {
           </div>
         ))}
         <div>
-          <h3>TOTAL R$ {order?.priceTotal} </h3>
+        <h3>TOTAL R$ {order?.priceTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
+
         </div>
       </div>
-    </main>
-  );
+    </main>
+  );
 }
