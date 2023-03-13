@@ -39,11 +39,11 @@ export default function ModalLogin({ isOpen, setIsOpen }: ModalLoginProps) {
 
         if (data.token) {
           if (data.role === 'admin') localStorage.setItem('isAdmin', 'true');
-          
+
           localStorage.setItem('token', data.token);
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('userId', data.userId);
-          
+
           formik.setValues({
             email: '',
             password: ''
@@ -91,7 +91,7 @@ export default function ModalLogin({ isOpen, setIsOpen }: ModalLoginProps) {
         password
       })
     });
-  
+
     return await response.json();
   };
 
@@ -106,44 +106,44 @@ export default function ModalLogin({ isOpen, setIsOpen }: ModalLoginProps) {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Já possui uma conta?</ModalHeader>
-          <form onSubmit={formik.handleSubmit}>
-            <ModalBody>
-                <label htmlFor="email">E-mail</label>
-                <Input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                />{' '}
-                <br />
-                <label htmlFor="password">Senha</label>
-                <Input
-                  type="password"
-                  id="password"
-                  name="password"
-                  required
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                />
-              
-            </ModalBody>
-            <ModalFooter>
-              <Button
-                colorScheme="green"
-                w="100%"
-                type="submit"
-              >
-                Entrar
-              </Button>
-              
-            </ModalFooter>
-            {isLoading && (
-              <Flex justify="center" >
-                <Spinner size='lg' />
-              </Flex>
-            )}
+        <form onSubmit={formik.handleSubmit}>
+          <ModalBody>
+            <label htmlFor="email">E-mail</label>
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              required
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />{' '}
+            <br />
+            <label htmlFor="password">Senha</label>
+            <Input
+              type="password"
+              id="password"
+              name="password"
+              required
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
+
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              colorScheme="green"
+              w="100%"
+              type="submit"
+            >
+              Entrar
+            </Button>
+
+          </ModalFooter>
+          {isLoading && (
+            <Flex justify="center" >
+              <Spinner size='lg' />
+            </Flex>
+          )}
         </form>
         <ModalHeader>Ainda não é cadastrado?</ModalHeader>
         <ModalFooter>
@@ -157,6 +157,6 @@ export default function ModalLogin({ isOpen, setIsOpen }: ModalLoginProps) {
           </Link>
         </ModalFooter>
       </ModalContent>
-    </Modal>
-  );
+    </Modal>
+  );
 }

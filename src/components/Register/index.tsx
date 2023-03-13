@@ -31,7 +31,7 @@ interface FetchProps {
 const SignupSchema = Yup.object({
   password: Yup.string().required('Password is required'),
   passwordConfirmation: Yup.string()
-    .test('passwords-match', 'Os valores da senhas devem ser iguais', function(value){
+    .test('passwords-match', 'Os valores da senhas devem ser iguais', function (value) {
       return this.parent.password === value
     })
 });
@@ -44,14 +44,14 @@ export default function Register() {
   const formik = useFormik({
     initialValues: {
       name: '',
-      email:'',
+      email: '',
       cpf: '',
       rg: '',
       gender: '',
       dateOfBirth: '',
       phone: '',
-      password:'',
-      passwordConfirmation:''
+      password: '',
+      passwordConfirmation: ''
     },
     validationSchema: SignupSchema,
     onSubmit: async values => {
@@ -61,7 +61,7 @@ export default function Register() {
         cpf: values.cpf.toString(),
         rg: values.rg ? values.rg.toString() : undefined,
         gender: values.gender,
-        birth: values.dateOfBirth ? new Date(values.dateOfBirth).toLocaleDateString('en-US', {timeZone: 'America/Sao_Paulo', month: '2-digit', day: '2-digit', year: 'numeric'}) : undefined,
+        birth: values.dateOfBirth ? new Date(values.dateOfBirth).toLocaleDateString('en-US', { timeZone: 'America/Sao_Paulo', month: '2-digit', day: '2-digit', year: 'numeric' }) : undefined,
         phone: values.phone.toString(),
         password: values.password,
         confirmpassword: values.passwordConfirmation
@@ -85,7 +85,7 @@ export default function Register() {
           formik.setSubmitting(false);
           formik.setStatus({ isSuccess: true });
           localStorage.setItem('userData', JSON.stringify(formData));
-          
+
           toast({
             title: 'Cadastro realizado com sucesso.',
             description: "Bem vindo ao Sportgear.",
@@ -119,7 +119,7 @@ export default function Register() {
       },
       body: JSON.stringify(data)
     });
-  
+
     return await response.json();
   };
 
@@ -159,7 +159,7 @@ export default function Register() {
                   required
                 />
               </FormControl>
-              
+
               <Flex className={styles.flex}>
                 <FormControl>
                   <FormLabel htmlFor="cpf">Cpf*</FormLabel>
@@ -305,6 +305,6 @@ export default function Register() {
           </form>
         </Box>
       </Flex>
-    </div>
-  );
+    </div>
+  );
 }

@@ -71,6 +71,9 @@ export default function ProductsList() {
                 <Link redirect={`/product/${product._id}`} key={product._id}>
                   <div className={styles.image}>
                     <img
+                      title='product'
+                      alt='Imagem do produto'
+                      className={styles.image}
                       src={`${serverUrl}/images/product/${product.images}`}
                     />
                     <h3 className={styles.h3}> {product.name} </h3>
@@ -81,13 +84,14 @@ export default function ProductsList() {
             })}
         </div>
         <div className={styles.pagination}>
-          <button onClick={handlePreviousPage} disabled={currentPage === 0}>
+          <button title='icon' onClick={handlePreviousPage} disabled={currentPage === 0}>
             <FaChevronLeft />
           </button>
           <span className={styles.span}>
             {currentPage + 1} de {pagesCount}
           </span>
           <button
+            title='icon'
             onClick={handleNextPage}
             disabled={currentPage === pagesCount - 1}
           >

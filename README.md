@@ -1,46 +1,115 @@
-# Getting Started with Create React App
+# <h1> Desafio Final - Gama Experience #46 - Ecommerce</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### GRUPO 03:
+<p>
+  <em>
+    <li> <a href="https://github.com/filipecalm">Filipe Carneiro</a><br>
+    <li> <a href="https://github.com/Lilianor">Lilian Oliveira</a><br>
+    <li> <a href="https://github.com/hectorbararua">Hector Ruan</a><br>
+  </em>
+</p>
 
-## Available Scripts
+###  ✅ Divisão da equipe:
 
-In the project directory, you can run:
+- **Front-end:**
+Lilian Oliveira
 
-### `npm start`
+- **Back-end:**
+Filipe Carneiro e Hector Ruan
+### ✅ Divisão de tarefas:
+<p>
+  <em>
+    Utilizamos metodologias ágeis através do kanban e sprints.
+  </em>
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![kanban](PRINT AQUI)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### ✅ Ferramentas utilizadas:
 
-### `npm test`
+- *Github*: repositórios e controle de versões.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- *Google Drive*: compartilhamento de arquivos.
 
-### `npm run build`
+- *Metodologia ágil*:  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - *Matriz de Eisenhower*: determinar a urgência e importância das tarefas.
+  - *Kanban*: acompanhar o andamento do fluxo de trabalho.
+- *Whatsapp*.
+- *Slack*.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ✅ Desafio:
+<p>
+  <em>
+    O objetivo principal do desafio foi desenvolver uma loja virtual.
+    O projeto desenvolvido é um MVP de ecommerce com o
+    intuito de colocarmos em prática todo o conhecimento
+    adquirido ao longo da nossa jornada. 
+  </em>
+</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ✅ Documentação no Postman:
 
-### `npm run eject`
+<div style="display: inline_block">
+  <a href="https://documenter.getpostman.com/view/24865465/2s93JtPi44">
+    <img align="center" alt="github" src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white" />
+  </a>
+  <br>
+</div>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### ✅ Iniciando o projeto - backend:
+<p>
+  <em>
+    📚 Para instalar as dependências do backend do projeto, digite npm install no terminal dentro da pasta raiz do projeto.<br>
+    📚 Inicie uma conexão local com o MongoDB Compass.<br>
+    📚 Digite no terminal o comando npm run dev para inicar o nodemon em instância de desenvolvimento.<br>
+  </em>
+</p>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### ✅ Iniciando o projeto - frontend:
+<p>
+  <em>
+    📚 O frontend foi criado utilizando o framework React. Para iniciar o projeto digite 'create-react-app' no terminal.<br>
+    📚 Para instalar as dependências do frontend do projeto, digite 'npm start' no terminal dentro da pasta raiz do projeto.<br>
+    📚 Execute o aplicativo no modo de desenvolvimento e abra (http://localhost:3000) para visualizá-lo no navegador. A página será recarregada se você fizer edições.<br>
+    📚 Digite 'npm run build' para criar o aplicativo para produção na pasta `build`.<br>
+  </em>
+</p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### ✅ Objetivo de aprendizagem:
+<p>
+  <em>
+    📚 Analisar e organizar o desenvolvimento de uma aplicação complexa do zero.<br>
+    📚 Desenvolver aplicações completas com React.<br>
+    📚 Desenvolver aplicações com Node.js e Express utilizando padrões de arquiteturas de acordo com a necessidade do projeto.<br>
+  </em>
+</p>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### ✅ Funcionalidades:
+<p>
+  <em>
+    <li> Página de login/autenticação.<br>
+    <li> Painel Administrativo.<br>
+    <li> Página de listagem de Produtos.<br>
+    <li> Página interna de Produtos que exibe as informações completas de determinado produto.<br>
+    <li> Página de carrinho de Produtos.<br>
+    <li> Página de sucesso de compra que retorna todos os produtos adquiridos.<br>
+    <li> Página de pedidos.<br>
+    <li> Página de dados pessoais.<br>
+    <br>
+    Recursos Extra:
+    <li> Cupom de desconto.<br>
+    <li> Filtro de produtos por categoria.<br>
+  </em>
+</p>
 
-## Learn More
+### Habilidades utilizadas:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<div style="display: inline_block">
+  <img align="center" alt="js" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img align="center" alt="nodejs" src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+  <img align="center" alt="mongodb" src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" />
+  <img align="center" alt="express" src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
+  <img align="center" alt="react" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <br>
+</div>

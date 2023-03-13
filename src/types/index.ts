@@ -28,5 +28,5 @@ export interface OrderProduct {
   
 export interface DataProps {
   data: Product | Category | Order | undefined;
-  [key: string]: any;
+  [key: string]: any;
 }

@@ -40,6 +40,9 @@ function App() {
             </Protected>
           }
         />
+
+        <Route path="/sobre" element={<About />} />
+
         <Route
           path="/editprofile"
           element={

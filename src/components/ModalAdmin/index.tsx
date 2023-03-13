@@ -4,7 +4,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalCloseButton,
+  ModalCloseButton
 } from '@chakra-ui/react';
 import ProductAdminForm from '../ProductAdminForm';
 import { DataProps } from '../../types';
@@ -22,20 +22,54 @@ interface ModalAdminProps {
   isEdit: boolean;
 }
 
-export default function ModalAdmin({ isOpen, setIsOpen, onClose, category, categoryTranslation, selectedItemData, isEdit = false }: ModalAdminProps) {
+export default function ModalAdmin({
+  isOpen,
+  setIsOpen,
+  onClose,
+  category,
+  categoryTranslation,
+  selectedItemData,
+  isEdit = false
+}: ModalAdminProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{isEdit ? 'Editar' : 'Criar'} {categoryTranslation}</ModalHeader>
+        <ModalHeader>
+          {isEdit ? 'Editar' : 'Criar'} {categoryTranslation}
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          {category === 'product' && <ProductAdminForm setIsOpen={setIsOpen} data={selectedItemData} onClose={onClose} />}
-          {category === 'category' && <CategoryAdminForm setIsOpen={setIsOpen} data={selectedItemData} onClose={onClose} />}
-          {category === 'user' && <ClientAdminForm setIsOpen={setIsOpen} data={selectedItemData} onClose={onClose} />}
-          {category === 'card' && <OrderAdminForm setIsOpen={setIsOpen} data={selectedItemData} onClose={onClose} />}
+          {category === 'product' && (
+            <ProductAdminForm
+              setIsOpen={setIsOpen}
+              data={selectedItemData}
+              onClose={onClose}
+            />
+          )}
+          {category === 'category' && (
+            <CategoryAdminForm
+              setIsOpen={setIsOpen}
+              data={selectedItemData}
+              onClose={onClose}
+            />
+          )}
+          {category === 'user' && (
+            <ClientAdminForm
+              setIsOpen={setIsOpen}
+              data={selectedItemData}
+              onClose={onClose}
+            />
+          )}
+          {category === 'card' && (
+            <OrderAdminForm
+              setIsOpen={setIsOpen}
+              data={selectedItemData}
+              onClose={onClose}
+            />
+          )}
         </ModalBody>
       </ModalContent>
-  </Modal>
-);
+    </Modal>
+  );
 }

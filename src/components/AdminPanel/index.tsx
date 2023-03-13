@@ -212,33 +212,29 @@ export default function AdminPanel() {
       <div className={styles.links}>
         <button
           onClick={() => setActiveCategory('product')}
-          className={`${styles.btn} ${
-            activeCategory === 'product' && styles.activeButton
-          }`}
+          className={`${styles.btn} ${activeCategory === 'product' && styles.activeButton
+            }`}
         >
           Produtos
         </button>
         <button
           onClick={() => setActiveCategory('category')}
-          className={`${styles.btn} ${
-            activeCategory === 'category' && styles.activeButton
-          }`}
+          className={`${styles.btn} ${activeCategory === 'category' && styles.activeButton
+            }`}
         >
           Categorias
         </button>
         <button
           onClick={() => setActiveCategory('user')}
-          className={`${styles.btn} ${
-            activeCategory === 'user' && styles.activeButton
-          }`}
+          className={`${styles.btn} ${activeCategory === 'user' && styles.activeButton
+            }`}
         >
           Clientes
         </button>
         <button
           onClick={() => setActiveCategory('card')}
-          className={`${styles.btn} ${
-            activeCategory === 'card' && styles.activeButton
-          }`}
+          className={`${styles.btn} ${activeCategory === 'card' && styles.activeButton
+            }`}
         >
           Pedidos
         </button>

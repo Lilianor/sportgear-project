@@ -29,7 +29,7 @@ export default function SuccessPage() {
 
   const fetchOrder = async () => {
     try {
-      const response = await fetch(`${serverUrl}/card/${id}`)
+      const response = await fetch(`${serverUrl}/card/${id}`);
       const data = await response.json();
       setOrder(data);
     } catch (error) {
@@ -39,7 +39,7 @@ export default function SuccessPage() {
 
   useEffect(() => {
     fetchOrder();
-  }, [id])
+  }, [id]);
 
   return (
     <main className={styles.main}>
@@ -51,11 +51,16 @@ export default function SuccessPage() {
           <div key={orderProduct._id}>
             <div className={styles.name}>
               <div className={styles.image}>
-                <img src={`${serverUrl}/images/product/${orderProduct.productsId.images}`} alt={orderProduct.productsId.name} />
+                <img
+                  src={`${serverUrl}/images/product/${orderProduct.productsId.images}`}
+                  alt={orderProduct.productsId.name}
+                />
               </div>
               <h3>NOME: {orderProduct.productsId.name}</h3>
               <h3>QTD: {orderProduct.amount}</h3>
-              <h3>DATA: {new Date(orderProduct.date).toLocaleString('en-GB')}</h3>
+              <h3>
+                DATA: {new Date(orderProduct.date).toLocaleString('en-GB')}
+              </h3>
               <h3>R$ {orderProduct.productsId.price}</h3>
             </div>
           </div>
@@ -64,6 +69,6 @@ export default function SuccessPage() {
           <h3>TOTAL R$ {order?.priceTotal} </h3>
         </div>
       </div>
-    </main>
-  );
+    </main>
+  );
 }
