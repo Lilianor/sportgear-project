@@ -53,9 +53,14 @@
   }
 }
 
-.images {
-  width: 60%;
-  padding: 10px 0;
+.image {
+  
+  width: spacing.$spacing-300;
+  height: auto;
+
+  & img {
+    width: 100%;
+  }
 }
 
 .text {

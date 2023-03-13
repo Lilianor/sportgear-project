@@ -31,14 +31,19 @@ interface UpdateUserProps {
 
 const EditProfileSchema = Yup.object({
   newPassword: Yup.string(),
-  confirmNewPassword: Yup.string()
-    .test('passwords-match', 'Os valores da senhas devem ser iguais', function(value){
-      return this.parent.newPassword === value
-    })
+  confirmNewPassword: Yup.string().test(
+    'passwords-match',
+    'Os valores da senhas devem ser iguais',
+    function (value) {
+      return this.parent.newPassword === value;
+    }
+  )
 });
 
 export default function EditProfile() {
-  const [userId, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<string>(
+    localStorage.getItem('userId') || ''
+  );
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   const toast = useToast();
@@ -53,7 +58,7 @@ export default function EditProfile() {
       phone: '',
       password: '',
       newPassword: '',
-      confirmNewPassword: '',
+      confirmNewPassword: ''
     },
     validationSchema: EditProfileSchema,
     onSubmit: async values => {
@@ -66,7 +71,9 @@ export default function EditProfile() {
         phone: values.phone ? values.phone : '',
         password: values.password ? values.password : '',
         newpassword: values.newPassword ? values.newPassword : '',
-        confirmpassword: values.confirmNewPassword ? values.confirmNewPassword : '',
+        confirmpassword: values.confirmNewPassword
+          ? values.confirmNewPassword
+          : ''
       };
       try {
         const responseData = await updateUser(formData);
@@ -75,19 +82,19 @@ export default function EditProfile() {
           formik.setStatus({ isSuccess: true });
           toast({
             title: 'Sucesso',
-            description: "Dados atualizados com sucesso.",
+            description: 'Dados atualizados com sucesso.',
             status: 'success',
             duration: 9000,
-            isClosable: true,
+            isClosable: true
           });
           navigate('/products');
-         } else {
+        } else {
           toast({
             title: 'Erro ao atualizar cadastro.',
-            description: "Verifique se os seus dados estão corretos.",
+            description: 'Verifique se os seus dados estão corretos.',
             status: 'error',
             duration: 9000,
-            isClosable: true,
+            isClosable: true
           });
         }
       } catch (error) {
@@ -102,15 +109,16 @@ export default function EditProfile() {
   const loadUserData = async () => {
     const token = localStorage.getItem('token');
 
-    if (token) {
-      const response = await fetch(`${serverUrl}/user/check`, {
+    if (token && userId) {
+      const response = await fetch(`${serverUrl}/user/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       });
       const data = await response.json();
+
       if (data) {
         formik.setValues({
           name: data.name,
@@ -121,7 +129,7 @@ export default function EditProfile() {
           phone: data.phone,
           password: '',
           newPassword: '',
-          confirmNewPassword: '',
+          confirmNewPassword: ''
         });
         localStorage.setItem('userData', JSON.stringify(data));
         setUserId(data._id);
@@ -137,11 +145,11 @@ export default function EditProfile() {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${localStorage.getItem('token')}`
       },
       body: JSON.stringify(data)
     });
-  
+
     return await response.json();
   };
 
@@ -283,9 +291,7 @@ export default function EditProfile() {
                   />
                 </FormControl>
                 <FormControl>
-                  <FormLabel htmlFor="newPassword">
-                    Nova senha
-                  </FormLabel>
+                  <FormLabel htmlFor="newPassword">Nova senha</FormLabel>
                   <Input
                     sx={inputBackground}
                     id="newPassword"
@@ -312,7 +318,9 @@ export default function EditProfile() {
                     isInvalid={!!formik.errors.confirmNewPassword}
                   />
                   {formik.errors.confirmNewPassword && (
-                    <div className={styles.errorMessage}>{formik.errors.confirmNewPassword}</div>
+                    <div className={styles.errorMessage}>
+                      {formik.errors.confirmNewPassword}
+                    </div>
                   )}
                 </FormControl>
               </Flex>
@@ -323,6 +331,6 @@ export default function EditProfile() {
           </form>
         </Box>
       </Flex>
-    </div>
-  );
+    </div>
+  );
 }

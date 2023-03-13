@@ -1,8 +1,14 @@
 @use '../../styles/colors';
 @use '../../styles/spacing';
 
-.img {
-  width: spacing.$spacing-200;
+.image {
+  
+  width: spacing.$spacing-300;
+  height: auto;
+
+  & img {
+    width: 100%;
+  }
 }
 
 .price {
@@ -43,6 +49,14 @@
   }
 }
 
+.text {
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .boxCart {
   display: flex;
   align-items: center;
@@ -50,7 +64,8 @@
   margin-bottom: spacing.$spacing-30;
 
   @media (max-width: 768px) {
-    justify-content: flex-end;
+    display: flex;
+    justify-content: center;
     flex-wrap: wrap;
   }
 }
@@ -68,7 +83,7 @@
 .btn {
   display: flex;
   justify-content: center;
-  width: spacing.$spacing-220;
+  width: spacing.$spacing-200;
   background-color: colors.$orange;
   color: colors.$white;
   border-radius: spacing.$spacing-10;

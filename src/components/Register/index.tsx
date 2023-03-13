@@ -36,7 +36,7 @@ const SignupSchema = Yup.object({
     })
 });
 
-export default function EditProfile() {
+export default function Register() {
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const toast = useToast();
   const navigate = useNavigate();

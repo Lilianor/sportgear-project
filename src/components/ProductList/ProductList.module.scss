@@ -2,23 +2,24 @@
 @use '../../styles/spacing';
 
 .container {
-  display: grid;
-  grid-template-rows: repeat(1, 1fr);
   padding: spacing.$spacing-100;
-  justify-content: center;
 }
 
- .box {
+.image {
+  width: spacing.$spacing-800;
+  height: auto;
+}
+
+.box {
   display: flex;
   align-items: center;
   gap: 50px;
-  padding-bottom: 40px;
 
   @media (max-width: 768px) {
-  display: block;
-  align-items: center;
+    display: block;
+    align-items: center;
   }
- }
+}
 
 .description {
   display: flex;
@@ -36,8 +37,7 @@
   }
 
   & p {
-    line-height: 2.0;
-    width: 75%;
+    line-height: 2;
   }
 
   @media (max-width: 768px) {
@@ -55,4 +55,3 @@
   padding: spacing.$spacing-12 spacing.$spacing-25;
   margin: spacing.$spacing-20 0;
 }
-

@@ -51,7 +51,7 @@ export default function RequestsPage() {
               </div>
               {order.OrdersProductId.map(orderProduct => (
                 <div>
-                  <div className="styles.image">
+                  <div className={styles.image}>
                     <img src={`${serverUrl}/images/product/${orderProduct.productsId.images}`} alt={orderProduct.productsId.name} />
                   </div>
                   <h3>NOME: {orderProduct.productsId.name}</h3>

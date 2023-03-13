@@ -9,6 +9,8 @@ import EditProfile from './pages/EditProfile';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
 import Protected from './components/Protected';
+import About from './components/About';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -21,7 +23,15 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/success/:id" element={<Success />} />
+        <Route path="/sobre" element={<AboutPage />} />
+        <Route
+          path="/success/:id"
+          element={
+            <Protected isLoggedIn={isLoggedIn}>
+              <Success />
+            </Protected>
+          }
+        />
         <Route
           path="/requests"
           element={

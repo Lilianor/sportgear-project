@@ -50,7 +50,7 @@ export default function SuccessPage() {
         {order?.OrdersProductId.map(orderProduct => (
           <div key={orderProduct._id}>
             <div className={styles.name}>
-              <div className="styles.image">
+              <div className={styles.image}>
                 <img src={`${serverUrl}/images/product/${orderProduct.productsId.images}`} alt={orderProduct.productsId.name} />
               </div>
               <h3>NOME: {orderProduct.productsId.name}</h3>
@@ -60,7 +60,7 @@ export default function SuccessPage() {
             </div>
           </div>
         ))}
-        <div>
+        <div className={styles.sun}>
           <h3>TOTAL R$ {order?.priceTotal} </h3>
         </div>
       </div>

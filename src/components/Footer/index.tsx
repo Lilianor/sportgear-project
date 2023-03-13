@@ -19,7 +19,7 @@ function Footer() {
             <li>
             <Link texto='Clientes' redirect='/' />
             </li>
-            <li><Link texto='Sobre' redirect='/' />
+            <li><Link texto='Sobre' redirect='sobre/' />
             </li>
           </ul>
         </div>

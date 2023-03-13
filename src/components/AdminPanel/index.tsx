@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Button,
-} from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import Table from 'react-bootstrap/Table';
 import ModalAdmin from '../ModalAdmin';
 import styles from './AdminPanel.module.scss';
@@ -21,24 +19,24 @@ const categoryTranslation = {
 const productFields = {
   _id: 'Id',
   name: 'Nome',
-  price: 'Preço',
+  price: 'Preço'
 };
 
 const categoryFields = {
   _id: 'Id',
-  name: 'Nome',
+  name: 'Nome'
 };
 
 const userFields = {
   _id: 'Id',
   name: 'Nome',
-  email: 'Email',
+  email: 'Email'
 };
 
 const orderFields = {
   _id: 'Id do Pedido',
   userId: 'Id do Cliente',
-  priceTotal: 'Preço Total',
+  priceTotal: 'Preço Total'
   // OrdersProductId: 'Produtos',
 };
 
@@ -54,7 +52,7 @@ const getHeader = (category: CategoryProps['category']) => {
       return userFields;
     default:
       return {};
-  };
+  }
 };
 
 function AdminTable({
@@ -64,10 +62,10 @@ function AdminTable({
   category,
   setIsEdit,
   setSelectedId
-}: any) // TODO: type
-{
+}: any) {
+  // TODO: type
   const filteredData = data.map((item: DataProps) => {
-    const filteredItem: {[key: string]: any} = {};
+    const filteredItem: { [key: string]: any } = {};
     Object.keys(header).forEach((key: string) => {
       filteredItem[key] = item[key];
     });
@@ -76,13 +74,16 @@ function AdminTable({
 
   const deleteItem = async (id: string) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/${category}/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/${category}/${id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
         }
-      });
+      );
       await response.json();
 
       const filteredData = data.filter((item: DataProps) => item._id !== id);
@@ -104,7 +105,7 @@ function AdminTable({
           <tr>
             {Object.keys(header).map((item: string) => (
               <th>{header[item]}</th>
-              ))}
+            ))}
             <th className={styles.actions}>Ações</th>
           </tr>
         </thead>
@@ -112,15 +113,22 @@ function AdminTable({
           {filteredData.map((item: DataProps) => (
             <tr key={item._id}>
               {Object.keys(item).map((key: string) => (
-                <td key={key}>{(key === 'price' || key === 'priceTotal') && 'R$ '}{item[key]}</td>
+                <td key={key}>
+                  {(key === 'price' || key === 'priceTotal') && 'R$ '}
+                  {item[key]}
+                </td>
               ))}
               <td>
                 <div className={styles.buttons}>
+                  {category !== 'card' && (
+                    <div className={styles.button}>
+                      <button onClick={() => editItem(item._id)}>Editar</button>
+                    </div>
+                  )}
                   <div className={styles.button}>
-                    <button onClick={() => editItem(item._id)}>Editar</button>
-                  </div>
-                  <div className={styles.button}>
-                    <button onClick={() => deleteItem(item._id)}>Excluir</button>
+                    <button onClick={() => deleteItem(item._id)}>
+                      Excluir
+                    </button>
                   </div>
                 </div>
               </td>
@@ -138,7 +146,8 @@ export default function AdminPanel() {
   const [isEdit, setIsEdit] = useState(false);
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
   const [selectedItemData, setSelectedItemData] = useState<DataProps>();
-  const [activeCategory, setActiveCategory] = useState<CategoryProps['category']>('product');
+  const [activeCategory, setActiveCategory] =
+    useState<CategoryProps['category']>('product');
   const [data, setData] = useState<DataProps>();
   const userStorageData = localStorage.getItem('userData');
   const userData = userStorageData ? JSON.parse(userStorageData) : null;
@@ -172,24 +181,24 @@ export default function AdminPanel() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const registerItem = () => {
     setIsOpen(true);
     setIsEdit(false);
-  }
+  };
 
   const onCloseModal = () => {
     console.log('onCloseModal');
     setIsOpen(false);
     setSelectedId(undefined);
     setSelectedItemData(undefined);
-  }
+  };
 
   useEffect(() => {
     if (selectedId) fetchItemData(selectedId);
   }, [selectedId]);
-  
+
   useEffect(() => {
     fetchListData();
   }, [activeCategory, isOpen]);
@@ -247,7 +256,7 @@ export default function AdminPanel() {
           category={activeCategory}
           setIsOpen={setIsOpen}
           setIsEdit={setIsEdit}
-          setSelectedId={setSelectedId} 
+          setSelectedId={setSelectedId}
         />
       )}
       <ModalAdmin
@@ -259,6 +268,6 @@ export default function AdminPanel() {
         isEdit={isEdit}
         selectedItemData={selectedItemData}
       />
-    </main>
-  );
+    </main>
+  );
 }

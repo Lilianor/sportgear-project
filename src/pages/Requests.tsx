@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 import RequestsPage from '../components/RequestsPage';
 
-export default function Success() {
+export default function Requests() {
   return (
     <>
       <Header />

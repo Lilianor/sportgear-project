@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 import Register from '../components/Register';
 
-export default function Success() {
+export default function RegisterPage() {
   return (
     <>
       <Header />

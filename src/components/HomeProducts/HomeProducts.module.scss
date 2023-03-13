@@ -11,13 +11,13 @@
   padding-bottom: spacing.$spacing-50;
   color: colors.$orange;
   font-weight: bold;
-  font-size: 30px;
+  font-size: spacing.$spacing-30;
 }
 
 .boxWrapper {
   display: flex;
   justify-content: center;
-  gap: 70px;
+  gap: spacing.$spacing-70;
 
   @media (max-width: 768px) {
     display: block;
@@ -26,12 +26,16 @@
 }
 
 .card {
-  width: 300px;
+  width: spacing.$spacing-300;
 }
 
 .cardImage {
   border-radius: spacing.$spacing-5;
   border: 1px groove colors.$grey;
+  max-width: 100%;
+  width: spacing.$spacing-300;
+  height: auto;
+
 }
 
 .cardTitle {
@@ -41,7 +45,7 @@
   font-weight: bold;
   font-size: spacing.$spacing-20;
   text-align: center;
-  min-height: 70px;
+  min-height: spacing.$spacing-70;
 }
 
 .cardBody {

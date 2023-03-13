@@ -49,7 +49,7 @@ export default function ProductList() {
       <>
         {product && (
           <div className={styles.box}>
-            <div className="styles.image">
+            <div className={styles.image}>
               <img src={`${serverUrl}/images/product/${product.images}`} alt="" />
             </div>
             <div className={styles.description}>

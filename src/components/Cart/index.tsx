@@ -25,6 +25,7 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState<CartProduct[]>(cartProducts);
 
   const token = localStorage.getItem('token');
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
   const removeProduct = (cartId: string) => {
     const updatedItems = cartItems?.filter(item => item.cartId !== cartId);
@@ -40,14 +41,16 @@ export default function Cart() {
   };
 
   const createOrder = () => {
-    if (!token) {
+    if (!token || !isLoggedIn) {
       toast({
         title: 'Usuário não autenticado.',
-        description: "Por favor realize o login ou cadastro antes de prosseguir com a compra.",
+        description:
+          'Por favor, faça seu login ou cadastre-se antes de prosseguir com a compra.',
         status: 'error',
         duration: 9000,
-        isClosable: true,
+        isClosable: true
       });
+      return;
     }
 
     const orderItems = cartProducts.map((product: CartProduct) => ({
@@ -68,10 +71,10 @@ export default function Cart() {
       .then(data => {
         toast({
           title: 'Sucesso.',
-          description: "Compra realizada com sucesso, obrigado.",
+          description: 'Compra realizada com sucesso, obrigado.',
           status: 'success',
           duration: 9000,
-          isClosable: true,
+          isClosable: true
         });
         localStorage.removeItem('cartProducts');
         navigate(`/success/${data._id}`);
@@ -80,10 +83,10 @@ export default function Cart() {
         console.error(error);
         toast({
           title: 'Oops.',
-          description: "Ocorreu um erro, por favor tente novamente.",
+          description: 'Ocorreu um erro, por favor tente novamente.',
           status: 'error',
           duration: 9000,
-          isClosable: true,
+          isClosable: true
         });
       });
   };
@@ -103,16 +106,18 @@ export default function Cart() {
           const { cartId, images, name, price } = product;
           return (
             <div key={cartId} className={styles.boxCart}>
-              <div className={styles.img}>
-                <img
-                  src={`${serverUrl}/images/product/${images}`}
-                  alt=""
-                />
+              <div className={styles.image}>
+                <img src={`${serverUrl}/images/product/${images}`} alt="" />
               </div>
               <div className={styles.text}>
                 <h3>{name}</h3>
                 <p>R$ {price || '0.00'}</p>
-                <button className={styles.btnStyle} onClick={() => removeProduct(product.cartId)}>Excluir</button>
+                <button
+                  className={styles.btnStyle}
+                  onClick={() => removeProduct(product.cartId)}
+                >
+                  Excluir
+                </button>
               </div>
             </div>
           );
@@ -125,7 +130,11 @@ export default function Cart() {
         </div>
         <div>
           <Link
-            texto="Finalizar Compra"
+            texto={
+              isLoggedIn
+                ? 'Finalizar compra'
+                : 'Faça seu login para finalizar a compra'
+            }
             className={styles.btn}
             onClick={createOrder}
           />
@@ -138,6 +147,6 @@ export default function Cart() {
           />
         </div>
       </div>
-    </main>
-  );
+    </main>
+  );
 }

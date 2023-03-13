@@ -54,7 +54,7 @@ export default function ProductsList() {
           <div className={styles.formCheckItem}>
             <ul>
               <li>
-                <Link texto="Evolution -" redirect="/products" />
+                <Link texto="Evolution" redirect="/products" />
               </li>
             </ul>
             <ul>
@@ -69,9 +69,8 @@ export default function ProductsList() {
             currentProducts.map(product => {
               return (
                 <Link redirect={`/product/${product._id}`} key={product._id}>
-                  <div className={styles.itemProduto}>
+                  <div className={styles.image}>
                     <img
-                      className={styles.image}
                       src={`${serverUrl}/images/product/${product.images}`}
                     />
                     <h3 className={styles.h3}> {product.name} </h3>
