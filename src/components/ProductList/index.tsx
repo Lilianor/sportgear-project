@@ -66,7 +66,7 @@ export default function ProductList() {
                 <h3>PREÇO:</h3>
               </div>
               <div>
-                <p>R$ {product.price}</p>
+                <p>R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
               </div>
               <div>
                 <button className={styles.btn} onClick={() => addToCart()}>Adicionar ao carrinho</button>

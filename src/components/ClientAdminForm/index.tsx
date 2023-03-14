@@ -183,7 +183,7 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
           onChange={formik.handleChange}
           value={formik.values.gender}
         >
-          {['M', 'F'].map(option => (
+          {['Masculino', 'Feminino'].map(option => (
             <option key={option} value={option.toLowerCase()}>
               {option}
             </option>
