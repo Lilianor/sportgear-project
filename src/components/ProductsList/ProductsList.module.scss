@@ -34,7 +34,7 @@
   display: flex;
   gap: spacing.$spacing-50;
   padding-bottom: spacing.$spacing-80;
- 
+
   @media (max-width: 990px) {
     margin-bottom: spacing.$spacing-80;
     display: contents;
@@ -64,7 +64,6 @@
 }
 
 .image {
-  
   width: spacing.$spacing-200;
   height: auto;
 
@@ -88,7 +87,14 @@
   font-size: spacing.$spacing-20;
 
   @media (max-width: 768px) {
-   padding-top: spacing.$spacing-80;
+    padding-top: spacing.$spacing-80;
   }
 }
 
+.activeCategory {
+  border-bottom: 3px solid colors.$orange;
+}
+
+.flex {
+  display: flex;
+}
