@@ -111,7 +111,7 @@ export default function Cart() {
               </div>
               <div className={styles.text}>
                 <h3>{name}</h3>
-                <p>R$ {price || '0.00'}</p>
+                <p>R$ {price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '0,00'}</p>
                 <button
                   className={styles.btnStyle}
                   onClick={() => removeProduct(product.cartId)}
@@ -126,7 +126,7 @@ export default function Cart() {
       <div className={styles.price}>
         <div className={styles.sun}>
           <h1>Total</h1>
-          <p>R$ {total.toFixed(2)}</p>
+          <p>R$ {total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
         </div>
         <div>
           <Link

@@ -57,11 +57,11 @@ export default function RequestsPage() {
                   <h3>NOME: {orderProduct.productsId.name}</h3>
                   <h3>QTD: {orderProduct.amount}</h3>
                   <h3>DATA: {new Date(orderProduct.date).toLocaleString('en-GB')}</h3>
-                  <h3>R$ {orderProduct.productsId.price}</h3>
+                  <h3>R$ {orderProduct.productsId.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h3>
                 </div>
               ))}
               <div>
-                <h3>TOTAL R$ {order.priceTotal} </h3>
+                <h3>TOTAL R$ {order.priceTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </h3>
               </div>
             </div>
           </div>

@@ -77,7 +77,7 @@ export default function ProductsList() {
                       src={`${serverUrl}/images/product/${product.images}`}
                     />
                     <h3 className={styles.h3}> {product.name} </h3>
-                    <p className={styles.p}>R$ {product.price}</p>
+                    <p className={styles.p}>R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                   </div>
                 </Link>
               );

@@ -70,7 +70,7 @@ export default function CategoryAdminForm({ setIsOpen, data, onClose }: any) {
           required
         />
       </FormControl>
-      <Button colorScheme="blue" mr={3} type="submit">
+      <Button colorScheme="blue" sx={{ margin: '20px 0' }} mr={3} type="submit">
         Salvar
       </Button>
       <Button onClick={() => onClose()}>Cancelar</Button>

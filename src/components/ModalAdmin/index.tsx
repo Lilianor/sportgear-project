@@ -35,13 +35,13 @@ export default function ModalAdmin({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>
-          {isEdit ? 'Editar' : 'Criar'} {categoryTranslation}
+        <ModalHeader sx={{ marginTop: '20px' }}>
+          {isEdit ? 'Editar' : 'Criar'}  {categoryTranslation} 
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody pb={6}>
+        <ModalBody pb={20}>
           {category === 'product' && (
-            <ProductAdminForm
+            <ProductAdminForm 
               setIsOpen={setIsOpen}
               data={selectedItemData}
               onClose={onClose}
@@ -52,6 +52,7 @@ export default function ModalAdmin({
               setIsOpen={setIsOpen}
               data={selectedItemData}
               onClose={onClose}
+              
             />
           )}
           {category === 'user' && (
@@ -59,6 +60,7 @@ export default function ModalAdmin({
               setIsOpen={setIsOpen}
               data={selectedItemData}
               onClose={onClose}
+              
             />
           )}
           {category === 'card' && (
@@ -66,6 +68,7 @@ export default function ModalAdmin({
               setIsOpen={setIsOpen}
               data={selectedItemData}
               onClose={onClose}
+              
             />
           )}
         </ModalBody>

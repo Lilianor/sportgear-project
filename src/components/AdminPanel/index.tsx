@@ -37,7 +37,6 @@ const orderFields = {
   _id: 'Id do Pedido',
   userId: 'Id do Cliente',
   priceTotal: 'Preço Total'
-  // OrdersProductId: 'Produtos',
 };
 
 const getHeader = (category: CategoryProps['category']) => {
@@ -63,7 +62,7 @@ function AdminTable({
   setIsEdit,
   setSelectedId
 }: any) {
-  // TODO: type
+  
   const filteredData = data.map((item: DataProps) => {
     const filteredItem: { [key: string]: any } = {};
     Object.keys(header).forEach((key: string) => {

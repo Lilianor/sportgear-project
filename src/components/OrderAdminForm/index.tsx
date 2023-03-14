@@ -1,9 +1,4 @@
-import {
-  Button,
-  Input,
-  FormControl,
-  useToast,
-} from '@chakra-ui/react';
+import { Button, Input, FormControl, useToast } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { submitAdminModalForm } from '../../utils/form';
@@ -12,7 +7,7 @@ export default function OrderAdminForm({ setIsOpen, data, onClose }: any) {
   const OrderSchema = Yup.object({
     userId: Yup.string().required('O ID do usuário é obrigatório.'),
     productsId: Yup.string().required('Id do produto é obrigatório'),
-    amount: Yup.number().required('A quantidade de produtos é obrigatória.'),
+    amount: Yup.number().required('A quantidade de produtos é obrigatória.')
   });
   const toast = useToast();
   const token = localStorage.getItem('token');
@@ -20,23 +15,23 @@ export default function OrderAdminForm({ setIsOpen, data, onClose }: any) {
   const emptyInitialValues = {
     userId: '',
     productsId: '',
-    amount: 1,
-  }
+    amount: 1
+  };
   const initialValues = data ? data : emptyInitialValues;
 
   const formik = useFormik({
     initialValues,
-    onSubmit: async (formData) => {
+    onSubmit: async formData => {
       const isUpdate = data ? true : false;
       const operation = isUpdate ? 'atualizado' : 'cadastrado';
       const parsedFormData = {
-        "product": [
+        product: [
           {
             productsId: formData.productsId,
-            amount: formData.amount,
+            amount: formData.amount
           }
         ],
-        "userId": formData.userId,
+        userId: formData.userId
       };
       const submitFormParams = {
         category: 'card',
@@ -46,8 +41,8 @@ export default function OrderAdminForm({ setIsOpen, data, onClose }: any) {
         token,
         isUpdate,
         id: data ? data._id : '',
-        toast,
-      }
+        toast
+      };
       const response = await submitAdminModalForm(submitFormParams);
       if (response !== 'Acesso Negado!') {
         formik.setSubmitting(false);
@@ -58,20 +53,20 @@ export default function OrderAdminForm({ setIsOpen, data, onClose }: any) {
           description: `Seu pedido foi ${operation}.`,
           status: 'success',
           duration: 9000,
-          isClosable: true,
+          isClosable: true
         });
         setIsOpen(false);
       } else {
         toast({
           title: 'Erro ao fazer a operação.',
-          description: "Por favor tente novamente.",
+          description: 'Por favor tente novamente.',
           status: 'error',
           duration: 9000,
-          isClosable: true,
+          isClosable: true
         });
       }
     },
-    validationSchema: OrderSchema,
+    validationSchema: OrderSchema
   });
 
   console.log(formik);
@@ -109,8 +104,17 @@ export default function OrderAdminForm({ setIsOpen, data, onClose }: any) {
           required
         />
       </FormControl>
-      <Button colorScheme="blue" mr={3} type="submit">Salvar</Button>
-      <Button onClick={() => onClose()}>Cancelar</Button>
+      <Button
+        colorScheme="blue"
+        mr={3}
+        type="submit"
+        sx={{ margin: '10px' }}
+      >
+        Salvar
+      </Button>
+      <Button onClick={() => onClose()} sx={{ margin: '10px' }}>
+        Cancelar
+      </Button>
     </form>
   );
 }

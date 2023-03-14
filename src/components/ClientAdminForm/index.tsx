@@ -115,6 +115,7 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
           status: 'error',
           duration: 9000,
           isClosable: true
+          
         });
       }
     },
@@ -124,7 +125,7 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormControl mt={4}>
-        <Input
+        <Input 
           id="name"
           name="name"
           placeholder="Nome"
@@ -183,7 +184,7 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
           onChange={formik.handleChange}
           value={formik.values.gender}
         >
-          {['M', 'F'].map(option => (
+          {['Masculino', 'Feminino'].map(option => (
             <option key={option} value={option.toLowerCase()}>
               {option}
             </option>
@@ -255,7 +256,7 @@ export default function ClientAdminForm({ setIsOpen, data, onClose }: any) {
         </FormControl>
       )}
 
-      <Button colorScheme="blue" mr={3} type="submit">
+      <Button colorScheme="blue" sx={{ margin: '20px 0' }} mr={3} type="submit">
         Salvar
       </Button>
       <Button onClick={() => onClose()}>Cancelar</Button>

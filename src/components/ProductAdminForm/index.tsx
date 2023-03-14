@@ -1,9 +1,4 @@
-import {
-  Button,
-  Input,
-  FormControl,
-  useToast,
-} from '@chakra-ui/react';
+import { Button, Input, FormControl, useToast } from '@chakra-ui/react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { submitAdminModalForm } from '../../utils/form';
@@ -14,7 +9,7 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
     price: Yup.number().required('Preço é obrigatório'),
     description: Yup.string().required('Descrição é obrigatório'),
     categoryid: Yup.string().required('Categoria é obrigatório'),
-    images: Yup.mixed(),
+    images: Yup.mixed()
   });
 
   const toast = useToast();
@@ -25,13 +20,15 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
     price: '',
     description: '',
     categoryid: '',
-    images: null,
-  }
-  const initialValues = data ? { ...data, categoryid: data.categoryid._id } : emptyInitialValues;
+    images: null
+  };
+  const initialValues = data
+    ? { ...data, categoryid: data.categoryid?._id }
+    : emptyInitialValues;
 
   const formik = useFormik({
     initialValues,
-    onSubmit: async (formData) => {
+    onSubmit: async formData => {
       const isUpdate = data ? true : false;
       const operation = isUpdate ? 'atualizado' : 'cadastrado';
       const submitFormParams = {
@@ -42,8 +39,8 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
         token,
         isUpdate,
         id: data ? data._id : '',
-        toast,
-      }
+        toast
+      };
       const response = await submitAdminModalForm(submitFormParams);
       console.log(response);
       if (response !== 'Acesso Negado!') {
@@ -55,20 +52,20 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
           description: `Seu produto foi ${operation}.`,
           status: 'success',
           duration: 9000,
-          isClosable: true,
+          isClosable: true
         });
         setIsOpen(false);
       } else {
         toast({
           title: 'Erro ao fazer a operação.',
-          description: "Por favor tente novamente.",
+          description: 'Por favor tente novamente.',
           status: 'error',
           duration: 9000,
-          isClosable: true,
+          isClosable: true
         });
       }
     },
-    validationSchema: productSchema,
+    validationSchema: productSchema
   });
 
   return (
@@ -110,12 +107,9 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
           name="images"
           placeholder="Imagem"
           type="file"
-          onChange={(event) => {
+          onChange={event => {
             if (event.currentTarget.files) {
-              formik.setFieldValue(
-                "images",
-                event.currentTarget.files[0]
-              );
+              formik.setFieldValue('images', event.currentTarget.files[0]);
             }
           }}
           required={data ? false : true}
@@ -131,8 +125,17 @@ export default function ProductAdminForm({ setIsOpen, data, onClose }: any) {
           required
         />
       </FormControl>
-      <Button colorScheme="blue" mr={3} type="submit">Salvar</Button>
-      <Button onClick={() => onClose()}>Cancelar</Button>
+      <Button
+        colorScheme="blue"
+        mr={3}
+        sx={{ marginTop: '20px' }}
+        type="submit"
+      >
+        Salvar
+      </Button>
+      <Button onClick={() => onClose()} sx={{ marginTop: '20px' }}>
+        Cancelar
+      </Button>
     </form>
   );
 }
